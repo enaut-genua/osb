@@ -90,7 +90,7 @@
 					<div class="form-group mb-3">
 						<label class="form-label">Role</label>
 						<select class="form-control" name="roleType" id="roleType">
-							<option th:each="roleOpt : ${T(org.osb.login.domain.role.model.Role.RoleType).values()}" 
+							<option th:each="roleOpt : ${T(org.osb.web.domain.role.model.Role.RoleType).values()}" 
 									th:value="${roleOpt}" 
 									th:text="${roleOpt}"></option>
 						</select>
