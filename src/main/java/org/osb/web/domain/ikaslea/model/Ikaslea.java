@@ -25,15 +25,13 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
-@Entity
-@Table(name = "Ikaslea")
+@Entity(name = "Ikaslea")
+@Table(name = "ikaslea")
 public class Ikaslea {
     
     @SuppressWarnings("unused")

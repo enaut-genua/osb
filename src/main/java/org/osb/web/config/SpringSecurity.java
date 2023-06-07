@@ -52,10 +52,8 @@ public class SpringSecurity {
 								.successHandler(new AuthenticationSuccessHandler() {
 									private SimpleUrlAuthenticationSuccessHandler adminSuccessHandler = new SimpleUrlAuthenticationSuccessHandler(
 											"/administration");
-									private SimpleUrlAuthenticationSuccessHandler studentSuccessHandler = new SimpleUrlAuthenticationSuccessHandler(
-											"/student");
-									private SimpleUrlAuthenticationSuccessHandler teacherSuccessHandler = new SimpleUrlAuthenticationSuccessHandler(
-											"/teacher");
+									private SimpleUrlAuthenticationSuccessHandler elseSuccessHandler = new SimpleUrlAuthenticationSuccessHandler(
+											"/menu");
 
 									@Override
 									public void onAuthenticationSuccess(HttpServletRequest request,
@@ -66,12 +64,8 @@ public class SpringSecurity {
 										if (roles.contains(Role.NAME_PREFIX + RoleType.Administrator.name())) {
 											adminSuccessHandler.onAuthenticationSuccess(request, response,
 													authentication);
-										} else if (roles.contains(Role.NAME_PREFIX + RoleType.Teacher.name())) {
-											teacherSuccessHandler.onAuthenticationSuccess(request, response,
-													authentication);
-										} else if (roles.contains(Role.NAME_PREFIX + RoleType.Student.name())) {
-											studentSuccessHandler.onAuthenticationSuccess(request, response,
-													authentication);
+										} else {
+											elseSuccessHandler.onAuthenticationSuccess(request, response, authentication);
 										}
 									}
 								}))
