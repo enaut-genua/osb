@@ -3,6 +3,7 @@ package org.osb.web.domain.artxiboa.model;
 import org.osb.web.domain.apuntea.model.Apuntea;
 import org.osb.web.domain.gaia.model.Gaia;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -36,6 +37,7 @@ public class Artxiboa {
     // aqui va el archivo (blob)
     //@Column
     @Lob
+    @Column(length = 1000000)
     private byte[] dokumentua;
 
     @ManyToOne
