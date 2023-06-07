@@ -46,8 +46,8 @@ public class User {
 	@Column(nullable = false)
 	private String password;
 
-	@Column(nullable = false)
-	private Date jaiotzeData;	
+	// @Column(nullable = false)
+	// private Date jaiotzeData;	
 
 	@OneToOne(mappedBy = "user")
 	private Irakaslea irakaslea;
