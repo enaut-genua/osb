@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
-public class AuthController {
+public class LoginController {
 
 	@Autowired
 	private UserService userService;

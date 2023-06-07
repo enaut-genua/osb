@@ -32,4 +32,5 @@ public class UserDto {
 
 	//@NotEmpty
 	private RoleType roleType;
+    
 }
