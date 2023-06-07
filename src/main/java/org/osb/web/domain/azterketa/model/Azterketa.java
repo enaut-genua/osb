@@ -2,6 +2,7 @@ package org.osb.web.domain.azterketa.model;
 
 import java.util.List;
 
+import org.osb.web.domain.ebaluaketa.model.Ebaluaketa;
 import org.osb.web.domain.ikasgaia.model.Ikasgaia;
 import org.osb.web.domain.ikaslea.model.Ikaslea;
 
@@ -12,6 +13,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -43,6 +45,9 @@ public class Azterketa {
 
     @ManyToMany
     private List<Ikaslea> ikaslea;
+
+    @OneToMany(mappedBy = "azterketa")
+    private List<Ebaluaketa> ebaluaketak;
     
 }
 

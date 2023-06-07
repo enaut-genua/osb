@@ -5,6 +5,7 @@ import java.util.List;
 import org.osb.web.domain.apuntea.model.Apuntea;
 import org.osb.web.domain.azterketa.model.Azterketa;
 import org.osb.web.domain.balorazioa.model.Balorazioa;
+import org.osb.web.domain.ebaluaketa.model.Ebaluaketa;
 import org.osb.web.domain.gradua.model.Gradua;
 import org.osb.web.domain.kurtsoa.model.Kurtsoa;
 import org.osb.web.domain.user.model.User;
@@ -50,10 +51,8 @@ public class Ikaslea {
 	)
     private List<Azterketa> azterketak;
 
-    // #############################################################
     @OneToMany(mappedBy = "ikaslea")
     private List<Balorazioa> balorazioak;
-    // #############################################################
 
     @OneToMany(mappedBy = "ikaslea")
     private List<Apuntea> apunteak;
@@ -64,8 +63,10 @@ public class Ikaslea {
     @ManyToOne
     private Kurtsoa kurtsoa;
 
+    @OneToMany(mappedBy = "ikaslea")
+    private List<Ebaluaketa> ebaluaketak;
+
     @OneToOne
-    //@JoinColumn(name = "user_userid")
     private User user;
 
 }
