@@ -34,8 +34,6 @@ public class Artxiboa {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long artxiboID;
 
-    // aqui va el archivo (blob)
-    //@Column
     @Lob
     @Column(length = 1000000)
     private byte[] dokumentua;
