@@ -24,8 +24,8 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-@Entity
-@Table(name = "Gaia")
+@Entity(name = "Gaia")
+@Table(name = "gaia")
 public class Gaia {
    
     @SuppressWarnings("unused")

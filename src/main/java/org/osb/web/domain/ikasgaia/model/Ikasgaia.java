@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.osb.web.domain.apuntea.model.Apuntea;
 import org.osb.web.domain.azterketa.model.Azterketa;
-import org.osb.web.domain.gaia.dto.GaiaDto;
+import org.osb.web.domain.gaia.model.Gaia;
 import org.osb.web.domain.irakaslea.model.Irakaslea;
 import org.osb.web.domain.kurtsoa.model.Kurtsoa;
 
@@ -42,7 +42,7 @@ public class Ikasgaia {
 	private String izena;
 
     @OneToMany(mappedBy = "ikasgaia")
-    private List<GaiaDto> gaiak;
+    private List<Gaia> gaiak;
 
     @OneToMany(mappedBy = "ikasgaia")
     private List<Azterketa> azterketak;

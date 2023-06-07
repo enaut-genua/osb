@@ -26,8 +26,8 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-@Entity
-@Table(name = "Apuntea")
+@Entity(name = "Apuntea")
+@Table(name = "apuntea")
 public class Apuntea {
     @SuppressWarnings("unused")
 	private static final long serialVersionUID = 1L;
