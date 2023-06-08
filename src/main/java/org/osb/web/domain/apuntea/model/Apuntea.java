@@ -19,33 +19,48 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "Apuntea")
-@Table(name = "apuntea")
+@ToString
+@Entity
+@Table(name = "Apuntea")
 public class Apuntea {
-	@SuppressWarnings("unused")
+    @SuppressWarnings("unused")
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long apunteID;
 
-	@Column(nullable = false)
+    @Column(nullable = false)
 	private String izena;
 
-	@OneToMany(mappedBy = "apuntea")
-	private List<Balorazioa> balorazioak;
+    @OneToMany(mappedBy = "apuntea")
+    private List<Balorazioa> balorazioak;
 
-	@ManyToOne
-	private Ikasgaia ikasgaia;
+    @ManyToOne
+    private Ikasgaia ikasgaia;
 
-	@ManyToOne
-	private Ikaslea ikaslea;
+    @ManyToOne
+    private Ikaslea ikaslea;
 
-	@OneToMany(mappedBy = "apuntea")
-	private List<Artxiboa> artxiboak;
+    @OneToMany(mappedBy = "apuntea")
+    private List<Artxiboa> artxiboak;
 }
+
+/*
+ * create table Apuntea (
+	apunteID		int,
+    izena			varchar(20),
+	upvotes			int,
+    downvotes		int,
+    ikasleNAN		int unsigned,
+    ikasgaiID		tinyint,
+    constraint APUNTE_PK primary key (apunteID),
+    constraint APUNTE_IKASLE_FK foreign key (ikasleNAN) references Ikaslea (NAN),
+    constraint APUNTE_IKASGAI_FK foreign key (ikasgaiID) references Ikasgaia (ikasgaiID));
+ */

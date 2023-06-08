@@ -1,0 +1,105 @@
+<!-- <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+
+<body>
+    <main>
+        <div class="album py-5" style="background-color: rgb(235, 167, 8);">
+            <div class="container">
+                <div class="row">
+                    <div class="row">
+                        <h1> Registered Ikasgaiak </h1>
+                    </div>
+   
+                    <table class="table table-striped table-bordered table-hover">
+                    
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Izena</th>
+                                <th>Link</th>
+                            </tr>
+                        </thead>
+                        <tbody> 
+                            <tr th:each="ikasgaia: ${ikasgaiak}">
+                                <td th:text="${ikasgaia.izena}"></td>
+                                <td><a class="button" th:href="@{/ikasgaiak/{izena}(izena = ${ikasgaia.izena})}">Sartu</a></td>
+                            </tr>
+                        </tbody>
+                    
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html> -->
+
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>OSB</title>
+    <link rel="stylesheet" th:href="@{/js/blob.js}" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    </head>
+
+  <body style="background-color: rgb(205, 134, 3)">
+
+    <div th:replace="~{/includes/head.html::header}"></div>
+
+    <main role="main">
+
+    <div class="">
+        <div class="container">
+    
+            <div class="row">
+    
+                <div class="col-md-4" th:each="ikasgaia: ${ikasgaiak}">
+                    <div class="card mb-4 box-shadow">
+                        <img class="card-img-top" th:data-src="@{'images/'+${ikasgaia.izena}+'.jpg'}"
+                            th:alt="@{'/images/'+${ikasgaia.izena}+'.jpg'}"
+                            style="height: 225px; width: 100%; display: block;"
+                            th:src="@{'images/'+${ikasgaia.izena}+'.jpg'}" data-holder-rendered="true">
+                        <div class="card-body" style="background-color: rgb(43, 43, 43);">
+                            <p class="card-text" th:text="${ikasgaia.izena}" style="color: antiquewhite;"></p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <a type="button" class="btn btn-sm btn-outline-secondary"
+                                        th:href="@{/ikasgaiak/{ikasgaiid}(ikasgaiid = ${ikasgaia.ikasgaiID})}">Ikusi</a>
+                                    <!-- <a type="button" class="btn btn-sm btn-outline-secondary"
+                                        th:href="@{/ikasgaiak/{id}(id = ${ikasgaia.ikasgaiID})}" th:text="${ikasgaia.ikasgaiID}"></a> -->
+                                    <!-- <a type="button" class="btn btn-sm btn-outline-secondary"
+                                        th:href="@{/ikasgaiak/{id}(id = ${ikasgaia.ikasgaiID})}">Editatu</a> -->
+                                </div>
+                                <small class="text-muted">6 kreditu</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    
+            </div>
+        </div>
+    </div>
+
+    </main>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script src="../../assets/js/vendor/popper.min.js"></script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+    <script src="../../assets/js/vendor/holder.min.js"></script> -->
+  
+
+<svg xmlns="http://www.w3.org/2000/svg" width="508" height="225" viewBox="0 0 508 225" preserveAspectRatio="none" style="display: none; visibility: hidden; position: absolute; top: -100%; left: -100%;"><defs><style type="text/css"></style></defs><text x="0" y="25" style="font-weight:bold;font-size:25pt;font-family:Arial, Helvetica, Open Sans, sans-serif">Thumbnail</text></svg></body></html>

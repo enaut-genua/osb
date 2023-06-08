@@ -17,13 +17,15 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "Gaia")
-@Table(name = "gaia")
+@ToString
+@Entity
+@Table(name = "Gaia")
 public class Gaia {
    
     @SuppressWarnings("unused")

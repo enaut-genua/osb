@@ -1,5 +1,9 @@
 package org.osb.web.domain.gaia.dto;
 
+import java.util.List;
+
+import org.osb.web.domain.artxiboa.dto.ArtxiboaDto;
+
 import jakarta.validation.constraints.NotEmpty;
 
 import lombok.AllArgsConstructor;
@@ -17,5 +21,9 @@ public class GaiaDto {
 
     @NotEmpty
     private String izena;
+
+    private String ikasgaiIzena;
+
+    private List<ArtxiboaDto> artxiboDtoLista;
 
 }

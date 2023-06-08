@@ -1,4 +1,4 @@
-use proba_diogo;
+use osb;
 
 -- Grados y cursos
 insert into gradua values (1, 'Ingeniería Informática'), (2, 'Administración de Empresas');

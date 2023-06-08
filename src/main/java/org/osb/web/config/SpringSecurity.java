@@ -29,6 +29,8 @@ import jakarta.servlet.http.HttpServletResponse;
 @EnableWebSecurity
 public class SpringSecurity {
 
+	private String[] resources = {"/css/**", "/js/**", "/images/**"};
+
 	@Autowired
 	private UserDetailsService userDetailsService;
 
@@ -42,8 +44,9 @@ public class SpringSecurity {
 		http
 				.authorizeHttpRequests(
 						authorize -> authorize
-								.requestMatchers("/css/**", "/js/**", "/images/**", "/register/**").permitAll()
-								.requestMatchers("/menu").authenticated()
+								.requestMatchers(resources).permitAll()
+								.requestMatchers("/register/**").permitAll()
+								.requestMatchers("/menu", "/ikasgaiak/**").authenticated()
 								.requestMatchers("/users").hasRole(RoleType.Administrator.name()))
 				.formLogin(
 						form -> form
@@ -53,7 +56,7 @@ public class SpringSecurity {
 									private SimpleUrlAuthenticationSuccessHandler adminSuccessHandler = new SimpleUrlAuthenticationSuccessHandler(
 											"/administration");
 									private SimpleUrlAuthenticationSuccessHandler elseSuccessHandler = new SimpleUrlAuthenticationSuccessHandler(
-											"/menu");
+											"/ikasgaiak");
 
 									@Override
 									public void onAuthenticationSuccess(HttpServletRequest request,
@@ -65,7 +68,8 @@ public class SpringSecurity {
 											adminSuccessHandler.onAuthenticationSuccess(request, response,
 													authentication);
 										} else {
-											elseSuccessHandler.onAuthenticationSuccess(request, response, authentication);
+											elseSuccessHandler.onAuthenticationSuccess(request, response,
+													authentication);
 										}
 									}
 								}))

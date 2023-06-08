@@ -2,7 +2,11 @@ package org.osb.web.domain.user.service.impl;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import org.osb.web.domain.role.model.Role;
 import org.osb.web.domain.role.repository.RoleRepository;
@@ -11,21 +15,17 @@ import org.osb.web.domain.user.model.User;
 import org.osb.web.domain.user.repository.UserRepository;
 import org.osb.web.domain.user.service.UserService;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
-
 @Service
 public class UserServiceImpl implements UserService {
-
-	@Autowired
+    
+    @Autowired
 	private UserRepository userRepository;
-
+	
 	@Autowired
 	private RoleRepository roleRepository;
 
-	@Autowired
-	private PasswordEncoder passwordEncoder;
+	//@Autowired
+	//private PasswordEncoder passwordEncoder;
 
 	@Override
 	public void saveUser(UserDto userDto) {
@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService {
 		user.setIzena(userDto.getName());
 		user.setAbizena(userDto.getSurname());
 		user.setEmail(userDto.getEmail());
-		user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+		//user.setPassword(passwordEncoder.encode(userDto.getPassword()));
 		user.setRole(roleRepository.findByType(userDto.getRoleType()).orElseGet(() -> {
 			Role newRole = new Role();
 			newRole.setType(userDto.getRoleType());
@@ -60,7 +60,7 @@ public class UserServiceImpl implements UserService {
 					userDto.setRoleType(user.getRole().getType());
 					return userDto;
 				})
-				.toList();
+				.collect(Collectors.toList());
 	}
 
 }

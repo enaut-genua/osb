@@ -25,13 +25,15 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "Ikaslea")
-@Table(name = "ikaslea")
+@ToString
+@Entity
+@Table(name = "Ikaslea")
 public class Ikaslea {
     
     @SuppressWarnings("unused")
@@ -55,16 +57,17 @@ public class Ikaslea {
     @OneToMany(mappedBy = "ikaslea")
     private List<Apuntea> apunteak;
 
+    @OneToMany(mappedBy = "ikaslea")
+    private List<Ebaluaketa> ebaluaketak;
+
     @ManyToOne
     private Gradua gradua;
 
     @ManyToOne
     private Kurtsoa kurtsoa;
 
-    @OneToMany(mappedBy = "ikaslea")
-    private List<Ebaluaketa> ebaluaketak;
-
     @OneToOne
+    //@JoinColumn(name = "user_userid")
     private User user;
 
 }

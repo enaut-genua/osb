@@ -1,8 +1,8 @@
 package org.osb.web.domain.role.model;
 
-import org.osb.web.domain.user.model.User;
-
 import java.util.List;
+
+import org.osb.web.domain.user.model.User;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -24,7 +24,7 @@ import lombok.Setter;
 @Table(name = "role")
 public class Role {
 
-	public static final String NAME_PREFIX = "ROLE_";
+    public static final String NAME_PREFIX = "ROLE_";
 
 	public enum RoleType {
 		Administrator,
@@ -37,11 +37,12 @@ public class Role {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Long roleID;
 
 	@Column(nullable = false)
 	private RoleType type;
 
 	@OneToMany(mappedBy = "role")
 	private List<User> users;
+
 }

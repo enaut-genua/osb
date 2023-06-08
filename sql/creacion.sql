@@ -1,7 +1,7 @@
-drop database if exists proba_diogo;
-create database proba_diogo;
+drop database if exists osb;
+create database osb;
 
-use proba_diogo;
+use osb;
 
 
 create table gradua (

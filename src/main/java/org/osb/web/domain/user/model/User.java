@@ -46,15 +46,18 @@ public class User {
 	@Column(nullable = false)
 	private String password;
 
-	// @Column(nullable = false)
-	// private Date jaiotzeData;	
+	@Column(nullable = false)
+	private Date jaiotzeData;	
 
 	@OneToOne(mappedBy = "user")
+	//@JoinColumn(name = "user_userid", nullable = true)
 	private Irakaslea irakaslea;
 
 	@OneToOne(mappedBy = "user")
+	//@JoinColumn(name = "user_userid", nullable = true)
 	private Ikaslea ikaslea;
 
-	@ManyToOne
+	@ManyToOne()
 	private Role role;
+
 }

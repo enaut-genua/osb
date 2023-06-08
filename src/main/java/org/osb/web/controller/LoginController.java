@@ -22,7 +22,7 @@ public class LoginController {
 
 	@GetMapping("/index")
 	public String home() {
-		return "login";
+		return "menu";
 	}
 
 	@GetMapping("/login")

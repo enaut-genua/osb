@@ -14,6 +14,8 @@ public class ArtxiboaDto {
     
     private Long artxiboID;
 
+    private String izena;
+
     @NotEmpty
     private byte[] dokumentua;
 

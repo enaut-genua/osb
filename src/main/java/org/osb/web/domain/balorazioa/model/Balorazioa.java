@@ -14,13 +14,15 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "Balorazioa")
-@Table(name = "balorazioa")
+@ToString
+@Entity
+@Table(name = "Balorazioa")
 public class Balorazioa {
 
     @Id

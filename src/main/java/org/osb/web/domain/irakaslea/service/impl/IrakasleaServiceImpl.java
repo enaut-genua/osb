@@ -4,12 +4,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import org.osb.web.domain.irakaslea.dto.IrakasleaDto;
 import org.osb.web.domain.irakaslea.model.Irakaslea;
 import org.osb.web.domain.irakaslea.repository.IrakasleaRepository;
 import org.osb.web.domain.irakaslea.service.IrakasleaService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 @Service
 public class IrakasleaServiceImpl implements IrakasleaService {

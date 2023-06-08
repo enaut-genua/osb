@@ -19,13 +19,15 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "Azterketa")
-@Table(name = "azterketa")
+@ToString
+@Entity
+@Table(name = "Azterketa")
 public class Azterketa {
     
     @SuppressWarnings("unused")
@@ -48,13 +50,3 @@ public class Azterketa {
     private List<Ebaluaketa> ebaluaketak;
     
 }
-
-/*
- * create table Azterketa (
-	azterketaID		tinyint unsigned,
-    izena			varchar(20) not null,
-    komentarioa		varchar(60),
-    ikasgaiID		tinyint,
-    constraint AZTERK_PK primary key (azterketaID),
-    constraint AZTERK_IKASGAI_FK foreign key (ikasgaiID) references Ikasgaia (ikasgaiID));
- */

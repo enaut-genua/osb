@@ -16,13 +16,15 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "Artxiboa")
-@Table(name = "artxiboa")
+@ToString
+@Entity
+@Table(name = "Artxiboa")
 public class Artxiboa {
     
     @SuppressWarnings("unused")
@@ -32,6 +34,11 @@ public class Artxiboa {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long artxiboID;
 
+    @Column
+    private String izena;
+
+    // aqui va el archivo (blob)
+    //@Column
     @Lob
     @Column(length = 1000000)
     private byte[] dokumentua;
