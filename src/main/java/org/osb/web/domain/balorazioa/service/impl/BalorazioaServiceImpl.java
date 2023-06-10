@@ -25,10 +25,6 @@ public class BalorazioaServiceImpl implements BalorazioaService {
 
 	@Override
 	public void saveBalorazioa(BalorazioaDto balorazioaDto) {
-		int apuntePuntuazioa = apunteaService
-				.findApunteaPuntuazioaById(balorazioaDto.getApunteaDto().getId())
-				.orElseThrow(() -> new IllegalStateException("Apunte ID-a jakin beharra dago."));
-
 		Apuntea apuntea = apunteaService
 				.findApunteaById(balorazioaDto.getApunteaDto().getId())
 				.orElseThrow(() -> new IllegalStateException("Apunte ID-a jakin beharra dago."));
@@ -37,13 +33,11 @@ public class BalorazioaServiceImpl implements BalorazioaService {
 				.findUserByEmail(balorazioaDto.getUserDto().getEmail())
 				.orElseThrow(() -> new IllegalStateException("User email jakina da."));
 
-		if (balorazioaRepository.findByApunteaAndUser(apuntea, user).isPresent()) {
-			balorazioaRepository.findByApunteaAndUser(apuntea, user).get().setBalorazioa(apuntePuntuazioa + balorazioaDto.getBalorazioa());
-		} else {
+		if (balorazioaRepository.findByApunteaAndUser(apuntea, user).isEmpty()) {
 			Balorazioa balorazioa = new Balorazioa();
 			balorazioa.setApuntea(apuntea);
 			balorazioa.setUser(user);
-			balorazioa.setBalorazioa(apuntePuntuazioa + balorazioaDto.getBalorazioa());
+			balorazioa.setBalorazioa(balorazioaDto.getBalorazioa());
 			balorazioaRepository.save(balorazioa);
 		}
 	}
