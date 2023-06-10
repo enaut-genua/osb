@@ -1,9 +1,9 @@
-<body th:fragment="sidebar">
-	<link rel="stylesheet" th:href="@{/css/sidebar.css}" />
-	<script src="/js/sidebar.js"></script>
-	<aside style="background-color: rgb(205, 134, 3);">
-		<!--span onclick="openNav()">open</span-->
-		<!--input type="image" onclick="openNav()" name="sidebar" src="/images/logo.png" width="150px" height="150px" alt="text"-->
+<html>
+
+	<body th:fragment="sidebar">
+		<link rel="stylesheet" th:href="@{/css/sidebar.css}" />
+		<script src="/js/sidebar.js"></script>
+		<aside style="background-color: rgb(205, 134, 3);">
 		<div class="hamburger-menu" onclick="openNav()">
 			<div class="bar top"></div>
 			<div class="bar middle"></div>
@@ -67,20 +67,9 @@
 						Notak
 					</a>
 				</li>
-				<!--c:forEach items="${requestScope.ikasgaiakSoilik}" var="ikasgaiakSoilik"> 
-                    <hr>
-                    <li class="nav-item">
-                        <a class="nav-link text-warning"  href="#">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-layers"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
-                        ${ikasgaiakSoilik}
-                    </a>
-                    <div class="col-md-12 text-center">
-                        <button type="button" class="btn btn-outline-warning">Edukiak</button>
-                        <button type="button" class="btn btn-outline-warning">Apunteak</button>
-                    </div>
-                </li>
-                </c:forEach-->
+
 			</ul>
 		</div>
 	</aside>
 </body>
+			</html>

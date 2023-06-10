@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{includes/head}">
 
 <head>
 	<meta charset="UTF-8">
@@ -12,9 +12,8 @@
 
 <body style="background-color: rgb(205, 134, 3);">
 
-	<div th:replace="~{/includes/head.html::header}"></div>
 
-	<main>
+	<main role="main" layout:fragment="main">
 		<div class="container" style="margin-top: 50px;">
 			<div class="row">
 				<div class="col-md-12">

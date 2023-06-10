@@ -103,8 +103,9 @@ public class IkasgaiaController {
 	}
 
 	@GetMapping("/ikasgaiak/{ikasgaiid}/gaiak/sortu")
-	public String gaiaSortuGet(Model model, @PathVariable("ikasgaiid") Long ikasgaiaID) {
+	public String gaiaSortuGet(Model model, @PathVariable("ikasgaiid") Long ikasgaiaID, Principal principal) {
 		model.addAttribute("ikasgaia", ikasgaiaService.findIkasgaiaDtoByID(ikasgaiaID).orElseThrow());
+		model.addAttribute("user", userService.findUserByEmail(principal.getName()).orElseThrow());
 		return "gaiaSortu";
 	}
 
