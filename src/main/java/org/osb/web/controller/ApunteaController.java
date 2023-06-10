@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 public class ApunteaController {
@@ -44,7 +45,7 @@ public class ApunteaController {
 	private BalorazioaService balorazioaService;
 
 	@GetMapping("/apunteak/{ikasgaiid}")
-	public String apuntetegiaFiltratuta(@PathVariable("ikasgaiid") Long ikasgaiID, Model model) {
+	public String apuntetegiaFiltratuta(@PathVariable("ikasgaiid") Long ikasgaiID, Model model, Principal principal) {
 		model
 				.addAttribute( // Apunteak bistaratzeko atributua
 						"apunteak",
@@ -57,19 +58,22 @@ public class ApunteaController {
 						ikasgaiaService
 								.findIkasgaiaDtoByID(ikasgaiID)
 								.orElseThrow())
-				.addAttribute("balorazioa", new BalorazioaDto());
+				.addAttribute("balorazioa", new BalorazioaDto())
+				.addAttribute("user", userService.findUserByEmail(principal.getName()).orElseThrow());
 		return "apuntetegia";
 	}
 
 	@GetMapping("/apunteak")
-	public String apuntetegia(Model model) {
-		model.addAttribute("apunteak", apunteaService.findAllApunteaDto());
+	public String apuntetegia(Model model, Principal principal) {
+		model
+				.addAttribute("apunteak", apunteaService.findAllApunteaDto())
+				.addAttribute("user", userService.findUserByEmail(principal.getName()).orElseThrow());
 		return "apuntetegia";
 	}
 
 	@PostMapping("/apunteak/{apunteId}")
 	public String apuntetegiaPost(@PathVariable("apunteId") Long apunteId, @RequestParam("bozka") int bozka,
-			Principal principal) {
+			Principal principal, HttpServletRequest request) {
 		UserDto userDto = userService
 				.findUserDtoByEmail(principal.getName())
 				.orElseThrow(() -> new IllegalStateException("Hona iristeko beti logeatua egon behar du."));
@@ -81,11 +85,12 @@ public class ApunteaController {
 		balorazioa.setUserDto(userDto);
 		balorazioa.setApunteaDto(apunteaDto);
 		balorazioaService.saveBalorazioa(balorazioa);
-		return "apuntetegia";
+		return "redirect:" + request.getHeader("Referer");
 	}
 
 	@GetMapping("/apunteak/sortu")
-	public String apuntetegiaSortu(Model model) {
+	public String apuntetegiaSortu(Model model, Principal principal) {
+		model.addAttribute("user", userService.findUserByEmail(principal.getName()).orElseThrow());
 		return "apunteaSortu";
 	}
 
@@ -93,7 +98,7 @@ public class ApunteaController {
 	public String apuntetegiaSortuPost(
 			@ModelAttribute("apuntea") ApunteaDto apunteaDto,
 			@RequestParam("artxiboak") List<MultipartFile> multipartFiles,
-			Principal principal) throws IOException {
+			Principal principal, Model model, HttpServletRequest request) throws IOException {
 		apunteaDto.setArtxiboDtoLista(new ArrayList<>());
 		apunteaDto.setEgileEmail(principal.getName());
 		for (MultipartFile multiPartFile : multipartFiles) {
@@ -103,9 +108,10 @@ public class ApunteaController {
 			apunteaDto.getArtxiboDtoLista().add(artxiboaDto);
 		}
 
+		model.addAttribute("user", userService.findUserByEmail(principal.getName()).orElseThrow());		
 		apunteaService.saveApuntea(apunteaDto);
 
-		return "apuntetegia";
+		return "redirect:" + request.getHeader("Referer");
 	}
 
 	@GetMapping("/apunteak/{apunteId}/deskargatu")

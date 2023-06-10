@@ -7,6 +7,7 @@ import org.osb.web.domain.ikasgaia.model.Ikasgaia;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -42,7 +43,7 @@ public class Gaia {
 	@ManyToOne
 	private Ikasgaia ikasgaia;
 
-    @OneToMany(mappedBy = "gaia")
+    @OneToMany(mappedBy = "gaia", fetch = FetchType.EAGER)
     private List<Artxiboa> artxiboak;
 
 }

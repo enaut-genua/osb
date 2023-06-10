@@ -1,5 +1,12 @@
 var x = window.matchMedia("(max-width: 700px)")
 
+$(document).ready(function () {
+    $('#sidebarCollapse').on('click', function () {
+        $('#sidebar').toggleClass('active');
+    });
+});
+
+
 /* Set the width of the side navigation to 250px */
 function openNav() {
     if (x.matches) { // If media query matches
@@ -20,3 +27,4 @@ function myFunction(x) {
         document.body.style.backgroundColor = "pink";
     }
 }
+

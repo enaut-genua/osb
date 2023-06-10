@@ -1,5 +1,6 @@
 package org.osb.web.domain.user.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -8,8 +9,9 @@ import java.util.stream.StreamSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
+import org.osb.web.domain.ikasgaia.dto.IkasgaiaDto;
 import org.osb.web.domain.role.model.Role;
+import org.osb.web.domain.role.model.Role.RoleType;
 import org.osb.web.domain.role.repository.RoleRepository;
 import org.osb.web.domain.user.dto.UserDto;
 import org.osb.web.domain.user.model.User;
@@ -78,6 +80,38 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public Optional<User> findUserByEmail(String email) {
 		return userRepository.findByEmail(email);
+	}
+
+	@Override
+	public List<IkasgaiaDto> findIkasgaiakDtoByUser(String username) {
+		RoleType userRole = userRepository.findByEmail(username).get().getRole().getType();
+		
+
+		if (userRole == RoleType.Teacher) {
+			return userRepository
+				.findByEmail(username)
+				.map(user -> user.getIrakaslea())
+				.map(irakaslea -> irakaslea.getIkasgaia()
+					.stream()
+					.map(ikasgaia -> {
+						IkasgaiaDto ikasgaiaDto = new IkasgaiaDto();
+                        ikasgaiaDto.setIkasgaiID(ikasgaia.getIkasgaiID());
+						ikasgaiaDto.setIzena(ikasgaia.getIzena());
+						return ikasgaiaDto;	
+					}).toList()).orElse(new ArrayList<>());
+		} else {
+			return userRepository
+				.findByEmail(username)
+				.map(user -> user.getIkaslea())
+				.map(ikaslea -> ikaslea.getKurtsoa().getIkasgaiak()
+					.stream()
+					.map(ikasgaia -> {
+						IkasgaiaDto ikasgaiaDto = new IkasgaiaDto();
+                        ikasgaiaDto.setIkasgaiID(ikasgaia.getIkasgaiID());
+						ikasgaiaDto.setIzena(ikasgaia.getIzena());
+						return ikasgaiaDto;	
+					}).toList()).orElse(new ArrayList<>());
+		}
 	}
 
 }

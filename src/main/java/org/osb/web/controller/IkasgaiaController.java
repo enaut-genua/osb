@@ -9,12 +9,17 @@ import java.util.Optional;
 import org.osb.web.domain.artxiboa.dto.ArtxiboaDto;
 import org.osb.web.domain.artxiboa.model.Artxiboa;
 import org.osb.web.domain.artxiboa.repository.ArtxiboaRepository;
+import org.osb.web.domain.azterketa.dto.AzterketaDto;
+import org.osb.web.domain.azterketa.service.AzterketaService;
+import org.osb.web.domain.ebaluaketa.dto.EbaluaketaDto;
 import org.osb.web.domain.gaia.dto.GaiaDto;
-import org.osb.web.domain.gaia.model.Gaia;
 import org.osb.web.domain.gaia.service.GaiaService;
 import org.osb.web.domain.ikasgaia.dto.IkasgaiaDto;
+import org.osb.web.domain.ikasgaia.model.Ikasgaia;
+import org.osb.web.domain.ikasgaia.repository.IkasgaiaRepository;
 import org.osb.web.domain.ikasgaia.service.IkasgaiaService;
-import org.osb.web.domain.ikaslea.service.IkasleaService;
+import org.osb.web.domain.user.model.User;
+import org.osb.web.domain.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -30,16 +35,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.view.RedirectView;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 
 @Controller
 public class IkasgaiaController {
 
 	@Autowired
-	private IkasleaService ikasleaService;
+	private UserService userService;
 
 	@Autowired
 	private IkasgaiaService ikasgaiaService;
+
+	@Autowired
+	private IkasgaiaRepository ikasgaiaRepository;
 
 	@Autowired
 	private ArtxiboaRepository artxiboaRepository;
@@ -47,51 +56,31 @@ public class IkasgaiaController {
 	@Autowired
 	private GaiaService gaiaService;
 
+	@Autowired
+	private AzterketaService azterketaService;
+
 	// visualizar todas en base al user
 	@GetMapping("/ikasgaiak")
 	public String home(Model model, Principal principal) {
-		List<IkasgaiaDto> ikasgaiak = ikasleaService.findIkasgaiakByUser(principal.getName());
-		model.addAttribute("ikasgaiak", ikasgaiak);
+		model.addAttribute("ikasgaiak", userService.findIkasgaiakDtoByUser(principal.getName()));
+		model.addAttribute("user", userService.findUserByEmail(principal.getName()).orElseThrow());
 		return "ikasgaiak";
 	}
 
 	// visualizar solo un ikasgai
 	@GetMapping("/ikasgaiak/{ikasgaiid}")
-	public String showGaiak(Model model, @PathVariable("ikasgaiid") Long ikasgaiID) {
+	public String showGaiak(Model model, @PathVariable("ikasgaiid") Long ikasgaiID, Principal principal) {
 		// aqui pillamos todos los gaiak del la ikasgaia que queremos
 		List<GaiaDto> ikasgaiBatenGaiakDto = ikasgaiaService.findGaiakDtoByIkasgaiaID(ikasgaiID);
 		model.addAttribute("gaiak", ikasgaiBatenGaiakDto);
-
-		// aqui pillamos los archivos del primer tema para que se carguen
-		// a la siguiente funcion le paso la lista de gaiak y pillare solo la primera
-		List<Gaia> ikasgaiBatenGaiak = ikasgaiaService.findGaiakByIkasgaiaID(ikasgaiID);
-		List<ArtxiboaDto> lehenengoGaiarenArtxiboak = gaiaService.findLehenengoGaiarenArtxiboak(ikasgaiBatenGaiak);
-		model.addAttribute("artxiboak", lehenengoGaiarenArtxiboak);
-
 		model.addAttribute("ikasgaia", ikasgaiaService.findIkasgaiaDtoByID(ikasgaiID)
 				.orElseThrow(() -> new IllegalStateException("Hemen ID-a zuzena izan beharko litzateke.")));
-
+		model.addAttribute("user", userService.findUserByEmail(principal.getName()).orElseThrow());
 		return "gaiak";
 	}
 
-	@GetMapping("/ikasgaiak/{ikasgaiid}/gaiak/{id}")
-	public String showArtxiboak(Model model, @PathVariable("id") Long id, @PathVariable("ikasgaiid") Long ikasgaiaID) {
-
-		System.out.println("gaiak controller");
-		List<ArtxiboaDto> gaiBatenArtxiboak = gaiaService.findArtxiboakByGaiaID(id);
-		model.addAttribute("artxiboak", gaiBatenArtxiboak);
-
-		List<GaiaDto> ikasgaiBatenGaiak = ikasgaiaService.findGaiakDtoByIkasgaiaID(ikasgaiaID);
-		model.addAttribute("gaiak", ikasgaiBatenGaiak);
-
-		model.addAttribute("ikasgaia", ikasgaiaService.findIkasgaiaDtoByID(ikasgaiaID)
-				.orElseThrow(() -> new IllegalStateException("Hemen ID-a zuzena izan beharko litzateke.")));
-
-		return "gaiak";
-	}
-
-	@PostMapping("/ikasgaiak/{ikasgaiid}/gaiak/gaiaSortu")
-	public RedirectView gaiaSortuGet(@Valid @ModelAttribute("gaia") GaiaDto gaia,
+	@PostMapping("/ikasgaiak/{ikasgaiid}/gaiak/sortu")
+	public RedirectView gaiaSortuPost(@Valid @ModelAttribute("gaia") GaiaDto gaia,
 			@PathVariable("ikasgaiid") Long ikasgaiaID, @RequestParam("archivos") List<MultipartFile> files)
 			throws IOException {
 		List<ArtxiboaDto> listArtxiboaDtos = new ArrayList<>();
@@ -113,13 +102,13 @@ public class IkasgaiaController {
 		return new RedirectView("/ikasgaiak/" + ikasgaiaID);
 	}
 
-	@GetMapping("/ikasgaiak/{ikasgaiid}/gaiak/gaiaSortu")
-	public String gaiaSortuPost(Model model, @PathVariable("ikasgaiid") Long ikasgaiaID) {
-		model.addAttribute("ikasgaia", ikasgaiaService.findIkasgaiaDtoByID(ikasgaiaID));
+	@GetMapping("/ikasgaiak/{ikasgaiid}/gaiak/sortu")
+	public String gaiaSortuGet(Model model, @PathVariable("ikasgaiid") Long ikasgaiaID) {
+		model.addAttribute("ikasgaia", ikasgaiaService.findIkasgaiaDtoByID(ikasgaiaID).orElseThrow());
 		return "gaiaSortu";
 	}
 
-	@GetMapping("/ikasgaiak/{ikasgaiid}/gaiak/{id}/deskargatu")
+	@GetMapping("/gaiak/{id}/deskargatu")
 	public ResponseEntity<byte[]> apunteakDescarga(@PathVariable("id") Long id) {
 		Artxiboa artxiboa = artxiboaRepository.findById(id).orElse(new Artxiboa());
 		if (artxiboa != null) {
@@ -133,4 +122,52 @@ public class IkasgaiaController {
 		}
 		return null;
 	}
+
+    @PostMapping("/ikasgaiak/{ikasgaiid}/notak/sortu")
+	public String notaking(Model model, @PathVariable("ikasgaiid") Long ikasgaiID, @RequestParam("nota") double nota, @RequestParam("ikaslea") String ikaslea, 
+            @RequestParam("komentarioa") String komentarioa, @RequestParam("izena") String izena, Principal principal, HttpServletRequest request) {
+
+		AzterketaDto azterketaDto = new AzterketaDto(null, null, izena, null);
+		EbaluaketaDto ebaluaketaDto = new EbaluaketaDto(nota, null, komentarioa);
+		User user = userService.findUserByEmail(ikaslea).orElseThrow();
+		ebaluaketaDto.setIkaslea(user.getIkaslea());
+
+        Ikasgaia ikasgaia = ikasgaiaRepository.findByIzena(ikasgaiaRepository.findById(ikasgaiID).orElseThrow().getIzena()).orElseThrow();
+		azterketaDto.setIkasgaia(ikasgaia);
+
+        model
+				.addAttribute("ikasgaia", ikasgaiaRepository.findById(ikasgaiID).orElseThrow())
+				.addAttribute("user", userService.findUserByEmail(principal.getName()).orElseThrow());
+		
+
+		azterketaService.saveAzterketa(azterketaDto, ebaluaketaDto);
+
+		return "redirect:" + request.getHeader("Referer"); 
+	}
+
+	@GetMapping("/ikasgaiak/{ikasgaiid}/notak/sortu")
+	public String sortu(Model model, @PathVariable("ikasgaiid") Long ikasgaiID, Principal principal) {
+
+		IkasgaiaDto ikasgaia = ikasgaiaService.findIkasgaiaDtoByID(ikasgaiID).orElseThrow();
+
+		model.addAttribute("ikasgaia", ikasgaia);
+		model.addAttribute("ebaluaketa", new EbaluaketaDto());
+		model.addAttribute("azterketa", new AzterketaDto());
+
+        User user = userService.findUserByEmail(principal.getName()).orElseThrow();
+        model.addAttribute("user", user);
+		
+		return "notaSortu";
+	}
+
+    @GetMapping("/ikasgaiak/notak/ikusi")
+    public String notakIkusi(Model model, Principal principal) {
+        User user = userService.findUserByEmail(principal.getName()).get();
+        model.addAttribute("user", user);
+
+        List<AzterketaDto> azterketaDto = azterketaService.findByIkalsea(user.getIkaslea());
+        model.addAttribute("azterketak", azterketaDto);
+
+        return "notak";
+    }
 }

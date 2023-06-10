@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import org.osb.web.domain.artxiboa.dto.ArtxiboaDto;
 import org.osb.web.domain.artxiboa.model.Artxiboa;
+import org.osb.web.domain.artxiboa.projection.ArtxiboaProjection;
 import org.osb.web.domain.artxiboa.repository.ArtxiboaRepository;
 import org.osb.web.domain.gaia.dto.GaiaDto;
 import org.osb.web.domain.gaia.model.Gaia;
@@ -20,56 +21,57 @@ import org.osb.web.domain.ikasgaia.repository.IkasgaiaRepository;
 @Service
 public class GaiaServiceImpl implements GaiaService {
 
-    @Autowired
-    private GaiaRepository gaiaRepository;
+	@Autowired
+	private GaiaRepository gaiaRepository;
 
-    @Autowired
+	@Autowired
 	private ArtxiboaRepository artxiboaRepository;
 
-    @Autowired
-    private IkasgaiaRepository ikasgaiaRepository;
+	@Autowired
+	private IkasgaiaRepository ikasgaiaRepository;
 
-    @Override
-    public List<GaiaDto> findAllGaias() {
-        Iterable<Gaia> gaiak = gaiaRepository.findAll();
+	@Override
+	public List<GaiaDto> findAllGaias() {
+		Iterable<Gaia> gaiak = gaiaRepository.findAll();
 
-        return StreamSupport.stream(gaiak.spliterator(), false).map(gaia -> {
-                GaiaDto gaiaDto = new GaiaDto();
-                gaiaDto.setIzena(gaia.getIzena());
-                return gaiaDto;
-            }).collect(Collectors.toList());
-    }
+		return StreamSupport.stream(gaiak.spliterator(), false).map(gaia -> {
+			GaiaDto gaiaDto = new GaiaDto();
+			gaiaDto.setIzena(gaia.getIzena());
+			return gaiaDto;
+		}).collect(Collectors.toList());
+	}
 
-    @Override
-    public List<ArtxiboaDto> findArtxiboakByGaiaID(Long id) {
-        return gaiaRepository
-            .findById(id)
-            .map(gaia -> gaia.getArtxiboak()
-                .stream()
-                .map(artxiboa -> {
-                    ArtxiboaDto artxiboaDto = new ArtxiboaDto();
-                    artxiboaDto.setIzena(artxiboa.getIzena());
-					artxiboaDto.setDatuak(artxiboa.getDokumentua());
-					artxiboaDto.setArtxiboID(artxiboa.getArtxiboID());
-                    return artxiboaDto;
-                })
-                .toList()).orElse(new ArrayList<>());
-    }
+	@Override
+	public List<ArtxiboaDto> findArtxiboakByGaiaID(Long id) {
+		return gaiaRepository
+				.findById(id)
+				.map(gaia -> gaia.getArtxiboak()
+						.stream()
+						.map(artxiboa -> {
+							ArtxiboaDto artxiboaDto = new ArtxiboaDto();
+							artxiboaDto.setIzena(artxiboa.getIzena());
+							artxiboaDto.setDatuak(artxiboa.getDokumentua());
+							artxiboaDto.setArtxiboID(artxiboa.getArtxiboID());
+							return artxiboaDto;
+						})
+						.toList())
+				.orElse(new ArrayList<>());
+	}
 
-    @Override
-    public List<ArtxiboaDto> findLehenengoGaiarenArtxiboak(List<Gaia> gaiak) {
+	@Override
+	public List<ArtxiboaDto> findLehenengoGaiarenArtxiboak(List<Gaia> gaiak) {
 
-        return gaiak.get(0).getArtxiboak().stream().map(artxiboa -> {
-            ArtxiboaDto artxiboaDto = new ArtxiboaDto();
-            artxiboaDto.setIzena(artxiboa.getIzena());
-            artxiboaDto.setDatuak(artxiboa.getDokumentua());
-            artxiboaDto.setArtxiboID(artxiboa.getArtxiboID());
-            return artxiboaDto; }
-        ).collect(Collectors.toList());
+		return gaiak.get(0).getArtxiboak().stream().map(artxiboa -> {
+			ArtxiboaDto artxiboaDto = new ArtxiboaDto();
+			artxiboaDto.setIzena(artxiboa.getIzena());
+			artxiboaDto.setDatuak(artxiboa.getDokumentua());
+			artxiboaDto.setArtxiboID(artxiboa.getArtxiboID());
+			return artxiboaDto;
+		}).collect(Collectors.toList());
 
-    }
+	}
 
-    @Override
+	@Override
 	public void saveGaia(GaiaDto gaiaDto) {
 		Gaia gaia = new Gaia();
 		gaia.setIzena(gaiaDto.getIzena());
@@ -83,6 +85,18 @@ public class GaiaServiceImpl implements GaiaService {
 			artxiboaRepository.save(artxiboaNew);
 		});
 		// gaia.setArtxiboak(converter(artxiboList));
+	}
+
+	@Override
+	public List<ArtxiboaProjection> findData(Long id) {
+		List<ArtxiboaProjection> lista = new ArrayList<>();
+		Gaia gaia = gaiaRepository.findById(id).orElse(new Gaia());
+
+		gaia.getArtxiboak().forEach((artxiboak) -> {
+			lista.add(artxiboaRepository.findDataByArtxiboID(artxiboak.getArtxiboID()));
+		});
+
+		return lista;
 	}
 
 }

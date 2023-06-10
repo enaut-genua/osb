@@ -30,6 +30,7 @@ import jakarta.servlet.http.HttpServletResponse;
 public class SpringSecurity {
 
 	private String[] resources = {"/css/**", "/js/**", "/images/**"};
+	private String[] authenticated = {"/menu", "/ikasgaiak/**", "/gaiak/**", "/apunteak/**", "/ourws/**", "/ws/**"}; 
 
 	@Autowired
 	private UserDetailsService userDetailsService;
@@ -45,8 +46,8 @@ public class SpringSecurity {
 				.authorizeHttpRequests(
 						authorize -> authorize
 								.requestMatchers(resources).permitAll()
-								.requestMatchers("/register/**").permitAll()
-								.requestMatchers("/menu", "/ikasgaiak/**", "/apunteak/**").authenticated()
+								.requestMatchers("/register/**").permitAll() // TODO(eñaut): ALDATU HAUUUU!!!
+								.requestMatchers(authenticated).authenticated()
 								.requestMatchers("/users").hasRole(RoleType.Administrator.name()))
 				.formLogin(
 						form -> form

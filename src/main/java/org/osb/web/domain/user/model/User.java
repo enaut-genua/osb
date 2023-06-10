@@ -56,11 +56,9 @@ public class User {
     private List<Balorazioa> balorazioak;
 
 	@OneToOne(mappedBy = "user")
-	//@JoinColumn(name = "user_userid", nullable = true)
 	private Irakaslea irakaslea;
 
 	@OneToOne(mappedBy = "user")
-	//@JoinColumn(name = "user_userid", nullable = true)
 	private Ikaslea ikaslea;
 
 	@ManyToOne()
