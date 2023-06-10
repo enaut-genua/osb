@@ -46,7 +46,7 @@ public class SpringSecurity {
 						authorize -> authorize
 								.requestMatchers(resources).permitAll()
 								.requestMatchers("/register/**").permitAll()
-								.requestMatchers("/menu", "/ikasgaiak/**").authenticated()
+								.requestMatchers("/menu", "/ikasgaiak/**", "/apunteak/**").authenticated()
 								.requestMatchers("/users").hasRole(RoleType.Administrator.name()))
 				.formLogin(
 						form -> form

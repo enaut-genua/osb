@@ -49,7 +49,7 @@ public class GaiaServiceImpl implements GaiaService {
                 .map(artxiboa -> {
                     ArtxiboaDto artxiboaDto = new ArtxiboaDto();
                     artxiboaDto.setIzena(artxiboa.getIzena());
-					artxiboaDto.setDokumentua(artxiboa.getDokumentua());
+					artxiboaDto.setDatuak(artxiboa.getDokumentua());
 					artxiboaDto.setArtxiboID(artxiboa.getArtxiboID());
                     return artxiboaDto;
                 })
@@ -62,7 +62,7 @@ public class GaiaServiceImpl implements GaiaService {
         return gaiak.get(0).getArtxiboak().stream().map(artxiboa -> {
             ArtxiboaDto artxiboaDto = new ArtxiboaDto();
             artxiboaDto.setIzena(artxiboa.getIzena());
-            artxiboaDto.setDokumentua(artxiboa.getDokumentua());
+            artxiboaDto.setDatuak(artxiboa.getDokumentua());
             artxiboaDto.setArtxiboID(artxiboa.getArtxiboID());
             return artxiboaDto; }
         ).collect(Collectors.toList());
@@ -77,7 +77,7 @@ public class GaiaServiceImpl implements GaiaService {
 		gaiaRepository.save(gaia);
 		gaiaDto.getArtxiboDtoLista().forEach((artxiboa) -> {
 			Artxiboa artxiboaNew = new Artxiboa();
-			artxiboaNew.setDokumentua(artxiboa.getDokumentua());
+			artxiboaNew.setDokumentua(artxiboa.getDatuak());
 			artxiboaNew.setIzena(artxiboa.getIzena());
 			artxiboaNew.setGaia(gaia);
 			artxiboaRepository.save(artxiboaNew);

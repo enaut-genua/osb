@@ -8,6 +8,7 @@ import org.osb.web.domain.user.model.User;
 
 public interface UserService {
 	void saveUser(UserDto userDto);
-	Optional<User> findByEmail(String email);
+	Optional<UserDto> findUserDtoByEmail(String email);
+	Optional<User> findUserByEmail(String email);
 	List<UserDto> findAllUsers();
 }

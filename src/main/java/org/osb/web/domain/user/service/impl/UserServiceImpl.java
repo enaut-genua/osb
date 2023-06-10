@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import org.osb.web.domain.role.model.Role;
@@ -17,15 +18,15 @@ import org.osb.web.domain.user.service.UserService;
 
 @Service
 public class UserServiceImpl implements UserService {
-    
-    @Autowired
+
+	@Autowired
 	private UserRepository userRepository;
-	
+
 	@Autowired
 	private RoleRepository roleRepository;
 
-	//@Autowired
-	//private PasswordEncoder passwordEncoder;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	@Override
 	public void saveUser(UserDto userDto) {
@@ -33,7 +34,7 @@ public class UserServiceImpl implements UserService {
 		user.setIzena(userDto.getName());
 		user.setAbizena(userDto.getSurname());
 		user.setEmail(userDto.getEmail());
-		//user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+		user.setPassword(passwordEncoder.encode(userDto.getPassword()));
 		user.setRole(roleRepository.findByType(userDto.getRoleType()).orElseGet(() -> {
 			Role newRole = new Role();
 			newRole.setType(userDto.getRoleType());
@@ -43,8 +44,19 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public Optional<User> findByEmail(String email) {
-		return userRepository.findByEmail(email);
+	public Optional<UserDto> findUserDtoByEmail(String email) {
+		return userRepository
+				.findByEmail(email)
+				.map(user -> {
+					UserDto userDto = new UserDto();
+					userDto.setName(user.getIzena());
+					userDto.setSurname(user.getAbizena());
+					userDto.setEmail(user.getEmail());
+					userDto.setPassword(user.getPassword());
+					userDto.setRoleType(user.getRole().getType());
+					userDto.setId(user.getUserID());
+					return userDto;
+				});
 	}
 
 	@Override
@@ -61,6 +73,11 @@ public class UserServiceImpl implements UserService {
 					return userDto;
 				})
 				.collect(Collectors.toList());
+	}
+
+	@Override
+	public Optional<User> findUserByEmail(String email) {
+		return userRepository.findByEmail(email);
 	}
 
 }

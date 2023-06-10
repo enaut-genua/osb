@@ -92,7 +92,7 @@ create table ebaluaketa (
     constraint EBALUAKETA_AZTERKETA_FK foreign key (azterketa_azterketaid) references azterketa (azterketaid));
 
 create table apuntea (
-	apunteid					bigint,
+	apunteid					bigint auto_increment,
     izena						varchar(20),
     ikaslea_ikasleid			bigint unsigned,
     ikasgaia_ikasgaiid			bigint,
@@ -101,12 +101,12 @@ create table apuntea (
     constraint APUNTE_IKASGAI_FK foreign key (ikasgaia_ikasgaiid) references ikasgaia (ikasgaiid));
 
 create table balorazioa (
-	balorazioid 				bigint,
+	balorazioid 				bigint auto_increment,
     balorazioa 					int,
-    ikaslea_ikasleid 			bigint unsigned,
+    user_userid 				bigint,
     apuntea_apunteid			bigint,
     constraint BALORAZIO_PK primary key (balorazioid),
-    constraint BALORAZIO_IKASLE_FK foreign key (ikaslea_ikasleid) references ikaslea (ikasleid),
+    constraint BALORAZIO_USER_FK foreign key (user_userid) references user (userid),
     constraint BALORAZIO_APUNTE_FK foreign key (apuntea_apunteid) references apuntea (apunteid));
 
 create table artxiboa (	

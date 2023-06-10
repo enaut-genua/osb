@@ -1,8 +1,7 @@
-package org.osb.web.domain.ikasgaia.dto;
-
-import java.util.List;
+package org.osb.web.domain.balorazioa.dto;
 
 import org.osb.web.domain.apuntea.dto.ApunteaDto;
+import org.osb.web.domain.user.dto.UserDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,8 +12,8 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class IkasgaiaDto {
-	private Long ikasgaiID;
-	private String izena;
-	private List<ApunteaDto> apunteak;
+public class BalorazioaDto {
+	private int balorazioa;
+	private ApunteaDto apunteaDto;
+	private UserDto userDto;
 }

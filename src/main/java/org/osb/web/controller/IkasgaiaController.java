@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.osb.web.domain.artxiboa.dto.ArtxiboaDto;
 import org.osb.web.domain.artxiboa.model.Artxiboa;
@@ -14,7 +15,6 @@ import org.osb.web.domain.gaia.service.GaiaService;
 import org.osb.web.domain.ikasgaia.dto.IkasgaiaDto;
 import org.osb.web.domain.ikasgaia.service.IkasgaiaService;
 import org.osb.web.domain.ikaslea.service.IkasleaService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -68,7 +68,8 @@ public class IkasgaiaController {
 		List<ArtxiboaDto> lehenengoGaiarenArtxiboak = gaiaService.findLehenengoGaiarenArtxiboak(ikasgaiBatenGaiak);
 		model.addAttribute("artxiboak", lehenengoGaiarenArtxiboak);
 
-		model.addAttribute("ikasgaia", ikasgaiaService.findIkasgaiaDtoByID(ikasgaiID));
+		model.addAttribute("ikasgaia", ikasgaiaService.findIkasgaiaDtoByID(ikasgaiID)
+				.orElseThrow(() -> new IllegalStateException("Hemen ID-a zuzena izan beharko litzateke.")));
 
 		return "gaiak";
 	}
@@ -83,7 +84,8 @@ public class IkasgaiaController {
 		List<GaiaDto> ikasgaiBatenGaiak = ikasgaiaService.findGaiakDtoByIkasgaiaID(ikasgaiaID);
 		model.addAttribute("gaiak", ikasgaiBatenGaiak);
 
-		model.addAttribute("ikasgaia", ikasgaiaService.findIkasgaiaDtoByID(ikasgaiaID));
+		model.addAttribute("ikasgaia", ikasgaiaService.findIkasgaiaDtoByID(ikasgaiaID)
+				.orElseThrow(() -> new IllegalStateException("Hemen ID-a zuzena izan beharko litzateke.")));
 
 		return "gaiak";
 	}
@@ -93,16 +95,20 @@ public class IkasgaiaController {
 			@PathVariable("ikasgaiid") Long ikasgaiaID, @RequestParam("archivos") List<MultipartFile> files)
 			throws IOException {
 		List<ArtxiboaDto> listArtxiboaDtos = new ArrayList<>();
-		gaia.setIkasgaiIzena(ikasgaiaService.findIkasgaiaDtoByID(ikasgaiaID).getIzena());
 
-		for (MultipartFile file : files) {
-			ArtxiboaDto tmp = new ArtxiboaDto();
-			tmp.setDokumentua(file.getBytes());
-			tmp.setIzena(file.getOriginalFilename());
-			listArtxiboaDtos.add(tmp);
+		Optional<IkasgaiaDto> ikasgaiaDtoOptional = ikasgaiaService.findIkasgaiaDtoByID(ikasgaiaID);
+
+		if (ikasgaiaDtoOptional.isPresent()) {
+			gaia.setIkasgaiIzena(ikasgaiaDtoOptional.get().getIzena());
+			for (MultipartFile file : files) {
+				ArtxiboaDto tmp = new ArtxiboaDto();
+				tmp.setDatuak(file.getBytes());
+				tmp.setIzena(file.getOriginalFilename());
+				listArtxiboaDtos.add(tmp);
+			}
+			gaia.setArtxiboDtoLista(listArtxiboaDtos);
+			gaiaService.saveGaia(gaia);
 		}
-		gaia.setArtxiboDtoLista(listArtxiboaDtos);
-		gaiaService.saveGaia(gaia);
 
 		return new RedirectView("/ikasgaiak/" + ikasgaiaID);
 	}
@@ -113,19 +119,18 @@ public class IkasgaiaController {
 		return "gaiaSortu";
 	}
 
-	@GetMapping("/ikasgaiak/{ikasgaiid}/gaiak/{id}/descargatu")
+	@GetMapping("/ikasgaiak/{ikasgaiid}/gaiak/{id}/deskargatu")
 	public ResponseEntity<byte[]> apunteakDescarga(@PathVariable("id") Long id) {
-		Artxiboa apunteak2 = artxiboaRepository.findById(id).orElse(new Artxiboa());
-		if (apunteak2 != null) {
-			byte[] contenidoArchivo = apunteak2.getDokumentua();
+		Artxiboa artxiboa = artxiboaRepository.findById(id).orElse(new Artxiboa());
+		if (artxiboa != null) {
+			byte[] contenidoArchivo = artxiboa.getDokumentua();
 
 			HttpHeaders headers = new HttpHeaders();
 			headers.setContentType(MediaType.APPLICATION_PDF);
-			headers.setContentDispositionFormData("attachment", apunteak2.getIzena());
+			headers.setContentDispositionFormData("attachment", artxiboa.getIzena());
 
 			return new ResponseEntity<>(contenidoArchivo, headers, HttpStatus.OK);
 		}
 		return null;
 	}
-
 }

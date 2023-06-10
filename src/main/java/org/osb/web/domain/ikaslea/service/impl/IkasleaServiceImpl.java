@@ -18,39 +18,41 @@ import org.osb.web.domain.user.repository.UserRepository;
 @Service
 public class IkasleaServiceImpl implements IkasleaService {
 
-    @Autowired
-    private IkasleaRepository ikasleaRepository;
+	@Autowired
+	private IkasleaRepository ikasleaRepository;
 
-    @Autowired
-    private UserRepository userRepository;
+	@Autowired
+	private UserRepository userRepository;
 
-    @Override
-    public List<IkasleaDto> findAllIkasleas() {
-        Iterable<Ikaslea> ikasleak = ikasleaRepository.findAll();
-        return StreamSupport.stream(ikasleak.spliterator(), false).map(ikaslea -> {
-            IkasleaDto ikasleaDto = new IkasleaDto();
-            // ikasleaDto.setIzena(ikaslea.getIzena());
-            // ikasleaDto.setAbizena(ikaslea.getAbizena());
-            // ikasleaDto.setEmail(ikaslea.getEmail());
-            // ikasleaDto.setJaiotzeData(ikaslea.getJaiotzeData());
-            return ikasleaDto;
-        }).collect(Collectors.toList());
-    }
+	@Override
+	public List<IkasleaDto> findAllIkasleas() {
+		Iterable<Ikaslea> ikasleak = ikasleaRepository.findAll();
+		return StreamSupport.stream(ikasleak.spliterator(), false).map(ikaslea -> {
+			IkasleaDto ikasleaDto = new IkasleaDto();
+			// ikasleaDto.setIzena(ikaslea.getIzena());
+			// ikasleaDto.setAbizena(ikaslea.getAbizena());
+			// ikasleaDto.setEmail(ikaslea.getEmail());
+			// ikasleaDto.setJaiotzeData(ikaslea.getJaiotzeData());
+			return ikasleaDto;
+		}).collect(Collectors.toList());
+	}
 
-    public List<IkasgaiaDto> findIkasgaiakByUser(String username) {
-
-        return userRepository
+	public List<IkasgaiaDto> findIkasgaiakByUser(String username) {
+		return userRepository
 				.findByEmail(username)
-                .map(user -> user.getIkaslea())
-				.map(ikaslea -> ikaslea.getKurtsoa().getIkasgaiak()
+				.map(user -> user.getIkaslea())
+				.map(ikaslea -> ikaslea
+						.getKurtsoa()
+						.getIkasgaiak()
 						.stream()
 						.map(ikasgaia -> {
 							IkasgaiaDto ikasgaiaDto = new IkasgaiaDto();
-                            ikasgaiaDto.setIkasgaiID(ikasgaia.getIkasgaiID());
+							ikasgaiaDto.setIkasgaiID(ikasgaia.getIkasgaiID());
 							ikasgaiaDto.setIzena(ikasgaia.getIzena());
-							return ikasgaiaDto;	
+							return ikasgaiaDto;
 						})
-						.toList()).orElse(new ArrayList<>());
-    }
+						.toList())
+				.orElse(new ArrayList<>());
+	}
 
 }

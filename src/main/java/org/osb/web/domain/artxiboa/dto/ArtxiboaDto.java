@@ -1,6 +1,5 @@
 package org.osb.web.domain.artxiboa.dto;
 
-import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,12 +10,11 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ArtxiboaDto {
-    
-    private Long artxiboID;
 
-    private String izena;
+	private Long artxiboID;
 
-    @NotEmpty
-    private byte[] dokumentua;
+	private String izena;
+
+	private byte[] datuak;
 
 }

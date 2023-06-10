@@ -43,7 +43,7 @@ public class LoginController {
 	public String registration(@Valid @ModelAttribute("user") UserDto user,
 			BindingResult result,
 			Model model) {
-		if (userService.findByEmail(user.getEmail()).isPresent()) {
+		if (userService.findUserDtoByEmail(user.getEmail()).isPresent()) {
 			result.rejectValue("email", null, "There is already an account registered with that email");
 			model.addAttribute("user", user);
 			return "register";

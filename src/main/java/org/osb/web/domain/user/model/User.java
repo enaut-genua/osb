@@ -1,7 +1,9 @@
 package org.osb.web.domain.user.model;
 
 import java.util.Date;
+import java.util.List;
 
+import org.osb.web.domain.balorazioa.model.Balorazioa;
 import org.osb.web.domain.ikaslea.model.Ikaslea;
 import org.osb.web.domain.irakaslea.model.Irakaslea;
 import org.osb.web.domain.role.model.Role;
@@ -12,6 +14,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -48,6 +51,9 @@ public class User {
 
 	@Column(nullable = false)
 	private Date jaiotzeData;	
+
+	@OneToMany(mappedBy = "user")
+    private List<Balorazioa> balorazioak;
 
 	@OneToOne(mappedBy = "user")
 	//@JoinColumn(name = "user_userid", nullable = true)

@@ -25,13 +25,13 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
+
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
+
 @Entity
 @Table(name = "Ikaslea")
 public class Ikaslea {
@@ -50,9 +50,6 @@ public class Ikaslea {
 		inverseJoinColumns = {@JoinColumn(name = "azterketa_azterketaid", referencedColumnName = "azterketaID")}
 	)
     private List<Azterketa> azterketak;
-
-    @OneToMany(mappedBy = "ikaslea")
-    private List<Balorazioa> balorazioak;
 
     @OneToMany(mappedBy = "ikaslea")
     private List<Apuntea> apunteak;
