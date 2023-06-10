@@ -10,19 +10,19 @@ insert into role values (1, 1), (2, 2), (3, 3);
 ########################################   Irakasleak   ########################################
 insert into user values 
 -- Profes infor
-(45679130, 'Xabier', 'Artetxe', 'xartetxe@osb.com', 'xabier', "2023-05-10 15:30:45", 2),
-(68032001, 'David', 'Pereira', 'dpereira@osb.com', 'david', "2023-05-10 15:30:45", 2),
-(34205520, 'Ekaitz', 'Urzelai', 'eurzelai@osb.com', 'ekaitz', "2023-05-10 15:30:45", 2),
-(67108894, 'Ander', 'Bruschi', 'abruchi@osb.com', 'ander', "2023-05-10 15:30:45", 2),
-(97248841, 'Peru', 'Jauregi', 'pjauregi@osb.com', 'peru', "2023-05-10 15:30:45", 2),
-(67217721, 'Telmo', 'Rubio', 'trubio@osb.com', 'telmo', "2023-05-10 15:30:45", 2),
-(97430220, 'Andoni', 'Urrutia', 'aurrutia@osb.com', 'andoni', "2023-05-10 15:30:45", 2),
+(45679130, 'Xabier', 'Artetxe', 'xartetxe@osb.com', '$2a$10$679zXBIfsAIRtjsMi06KJOc96FybtlWevw98U7OB9cHMuQGcPtccu', "2023-05-10 15:30:45", 2),
+(68032001, 'David', 'Pereira', 'dpereira@osb.com', '$2a$10$679zXBIfsAIRtjsMi06KJOc96FybtlWevw98U7OB9cHMuQGcPtccu', "2023-05-10 15:30:45", 2),
+(34205520, 'Ekaitz', 'Urzelai', 'eurzelai@osb.com', '$2a$10$679zXBIfsAIRtjsMi06KJOc96FybtlWevw98U7OB9cHMuQGcPtccu', "2023-05-10 15:30:45", 2),
+(67108894, 'Ander', 'Bruschi', 'abruchi@osb.com', '$2a$10$679zXBIfsAIRtjsMi06KJOc96FybtlWevw98U7OB9cHMuQGcPtccu', "2023-05-10 15:30:45", 2),
+(97248841, 'Peru', 'Jauregi', 'pjauregi@osb.com', '$2a$10$679zXBIfsAIRtjsMi06KJOc96FybtlWevw98U7OB9cHMuQGcPtccu', "2023-05-10 15:30:45", 2),
+(67217721, 'Telmo', 'Rubio', 'trubio@osb.com', '$2a$10$679zXBIfsAIRtjsMi06KJOc96FybtlWevw98U7OB9cHMuQGcPtccu', "2023-05-10 15:30:45", 2),
+(97430220, 'Andoni', 'Urrutia', 'aurrutia@osb.com', '$2a$10$679zXBIfsAIRtjsMi06KJOc96FybtlWevw98U7OB9cHMuQGcPtccu', "2023-05-10 15:30:45", 2),
 -- Profes ADE
-(91308476, 'Gaizka', 'Saenz', 'gsaenz@osb.com', 'gaizka', "2023-05-10 15:30:45", 2),
-(10007970, 'Eñaut', 'Genua', 'egenua@osb.com', 'eñaut', "2023-05-10 15:30:45", 2),
-(54672210, 'Gorka', 'Fernandez', 'gfernandez@asb.com', 'gorka', "2023-05-10 15:30:45", 2),
-(32186441, 'Martzel', 'Gutierrez', 'mgutierrez@osb.com', 'martzel', "2023-05-10 15:30:45", 2),
-(65472210, 'Eider', 'Allan Poe', 'eallan@osb.com', 'eider', "2023-05-10 15:30:45", 2);
+(91308476, 'Gaizka', 'Saenz', 'gsaenz@osb.com', '$2a$10$679zXBIfsAIRtjsMi06KJOc96FybtlWevw98U7OB9cHMuQGcPtccu', "2023-05-10 15:30:45", 2),
+(10007970, 'Eñaut', 'Genua', 'egenua@osb.com', '$2a$10$679zXBIfsAIRtjsMi06KJOc96FybtlWevw98U7OB9cHMuQGcPtccu', "2023-05-10 15:30:45", 2),
+(54672210, 'Gorka', 'Fernandez', 'gfernandez@asb.com', '$2a$10$679zXBIfsAIRtjsMi06KJOc96FybtlWevw98U7OB9cHMuQGcPtccu', "2023-05-10 15:30:45", 2),
+(32186441, 'Martzel', 'Gutierrez', 'mgutierrez@osb.com', '$2a$10$679zXBIfsAIRtjsMi06KJOc96FybtlWevw98U7OB9cHMuQGcPtccu', "2023-05-10 15:30:45", 2),
+(65472210, 'Eider', 'Allan Poe', 'eallan@osb.com', '$2a$10$679zXBIfsAIRtjsMi06KJOc96FybtlWevw98U7OB9cHMuQGcPtccu', "2023-05-10 15:30:45", 2);
 
 insert into irakaslea values
 -- Profes info
