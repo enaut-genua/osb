@@ -29,7 +29,7 @@
 									<form th:action="@{/apunteak/{apunteId}(apunteId = ${apuntea.id})}" method="post">
 										<input type="submit" name="bozka" value="+1">
 										<span class="card-text" th:text="${apuntea.puntuazioa}"></span>
-										<input type="submit" class="btn btn-default btn-sm" name="bozka" value="-1">
+										<input type="submit" name="bozka" value="-1">
 									</form>
 								</div>
 							</div>
