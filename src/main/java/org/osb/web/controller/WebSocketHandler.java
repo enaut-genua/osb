@@ -3,7 +3,6 @@ package org.osb.web.controller;
 import java.util.List;
 
 import org.osb.web.domain.apuntea.dto.ApunteaDto;
-import org.osb.web.domain.apuntea.projection.ApunteaProjection;
 import org.osb.web.domain.apuntea.service.ApunteaService;
 import org.osb.web.domain.artxiboa.projection.ArtxiboaProjection;
 import org.osb.web.domain.gaia.service.GaiaService;
@@ -29,6 +28,11 @@ public class WebSocketHandler {
     @SendTo("/osb/apunteak")
     public List<ApunteaDto> getApunteak(){
         return apunteaService.findApunteakInfo();
+    }
+     @MessageMapping("/apunteak/ikasgaia")
+    @SendTo("/osb/apunteak")
+    public List<ApunteaDto> getApunteakByIkagaia(Long id){
+        return apunteaService.findApunteakInfoByIkasgaia(id);
     }
 
 }

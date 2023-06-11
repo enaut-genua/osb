@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import org.osb.web.domain.apuntea.dto.ApunteaDto;
 import org.osb.web.domain.apuntea.model.Apuntea;
-import org.osb.web.domain.apuntea.projection.ApunteaProjection;
 
 public interface ApunteaService {
 	Optional<ApunteaDto> findApunteaDtoById(Long id);
@@ -13,5 +12,6 @@ public interface ApunteaService {
 	Optional<Integer> findApunteaPuntuazioaById(Long id);
 	void saveApuntea(ApunteaDto apunteaDto);
 	List<ApunteaDto> findAllApunteaDto();
+	List<ApunteaDto> findApunteakInfoByIkasgaia(Long id);
 	List<ApunteaDto> findApunteakInfo();
 }

@@ -6,13 +6,13 @@ import java.util.stream.StreamSupport;
 
 import org.osb.web.domain.apuntea.dto.ApunteaDto;
 import org.osb.web.domain.apuntea.model.Apuntea;
-import org.osb.web.domain.apuntea.projection.ApunteaProjection;
 import org.osb.web.domain.apuntea.repository.ApunteaRepository;
 import org.osb.web.domain.apuntea.service.ApunteaService;
 import org.osb.web.domain.artxiboa.dto.ArtxiboaDto;
 import org.osb.web.domain.artxiboa.model.Artxiboa;
 import org.osb.web.domain.artxiboa.repository.ArtxiboaRepository;
 import org.osb.web.domain.balorazioa.model.Balorazioa;
+import org.osb.web.domain.ikasgaia.model.Ikasgaia;
 import org.osb.web.domain.ikasgaia.repository.IkasgaiaRepository;
 import org.osb.web.domain.user.service.UserService;
 
@@ -120,6 +120,19 @@ public class ApunteaServiceImpl implements ApunteaService {
 	public List<ApunteaDto> findApunteakInfo() {
 		
 		return apunteaRepository.findAllApunteaBy().stream().map(apunteaProjection->{
+			ApunteaDto apuntea = new ApunteaDto();
+			apuntea.setId(apunteaProjection.getApunteID());
+			apuntea.setEgileEmail(apunteaProjection.getIkaslea_User_Email());
+			apuntea.setIzena(apunteaProjection.getIzena());
+			apuntea.setPuntuazioa(findApunteaPuntuazioaById(apunteaProjection.getApunteID()).orElseThrow());
+			return apuntea;
+		}).toList();
+	}
+
+	@Override
+	public List<ApunteaDto> findApunteakInfoByIkasgaia(Long id) {
+		Ikasgaia ikas = ikasgaiaRepository.findById(id).orElseThrow();
+		return apunteaRepository.findAllApunteaByIkasgaia(ikas).stream().map(apunteaProjection->{
 			ApunteaDto apuntea = new ApunteaDto();
 			apuntea.setId(apunteaProjection.getApunteID());
 			apuntea.setEgileEmail(apunteaProjection.getIkaslea_User_Email());

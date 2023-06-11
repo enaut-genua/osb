@@ -17,6 +17,7 @@
 
 		<div class="col col-lg-2" style="margin-top: 10px;">
 			<div class="row">
+				<input type="hidden" id="emaila" th:value="${user.email}">
 				<p th:text="${user.izena} + ' ' + ${user.abizena}"
 					style="color: aliceblue; padding-left: 50px; padding-top: 2px;" class="col-lg-8"></p>
 				<div class="col col-lg-4">
