@@ -41,7 +41,7 @@ function showMessage(message) {
     for (var i = 0; i < artxiboLista.length; i++) {
         id = artxiboLista[i].artxiboID;
         izena = artxiboLista[i].izena;
-        gehituHtml = "<div class='card mb-3' style='background-color: rgb(43, 43, 43);''><h3 class='card-header' style='color: antiquewhite;''>" + izena + "</h3><div class='card-body'><a href='/gaiak/" + id + "/deskargatu' class='card-link'>Deskargatu</a></div></div>";
+        gehituHtml = "<div class='card mb-3' style='background-color: rgb(43, 43, 43); margin-top: 10px;'><h3 class='card-header' style='color: antiquewhite;''>" + izena + "</h3><div class='card-body'><a href='/gaiak/" + id + "/deskargatu' class='card-link'>Deskargatu</a></div></div>";
         $("#dataContainer").append(gehituHtml);
     }
 }

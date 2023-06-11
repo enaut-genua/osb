@@ -23,13 +23,13 @@
 					<div class="row">
 						<h1 th:text="${ikasgaia.izena}"></h1>
 					</div>
-					<table class="table table-striped table-bordered table-hover">
+					<table class="table table-striped table-bordered table-hover" style="margin-top: 20px;">
 
 						<div class="card">
 
 							<div class="container">
 
-								<ul class="nav nav-tabs">
+								<ul class="nav nav-tabs" >
 									<li class="nav-item" th:each="gaia: ${gaiak}">
 										<button type="button" class="nav-link send" th:text="${gaia.izena}"
 											th:value="${gaia.gaiaID}"></button>
@@ -89,9 +89,9 @@
 								</ul>
 
 								<!-- WEB SOCKET -->
-								<div class="tab-content" id="myTabContent">
+								<div class="tab-content" id="myTabContent" style="margin-top: 10px; margin-bottom: 10px;">
 									<div id="dataContainer">
-
+										<h2>Aukeratu Gaia</h2>
 									</div>
 								</div>
 					</table>

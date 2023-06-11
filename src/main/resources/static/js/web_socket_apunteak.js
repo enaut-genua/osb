@@ -47,7 +47,7 @@ function showMessage(message) {
     var puntuazioa = apunteLista[i].puntuazioa;
 gehituHtml = String.raw`
 <div class="col-md-3" >
-    <div class="card" style="width: 18rem; background-color: rgb(43, 43, 43); margin-top: 30px; align-items: center;">
+    <div class="card" style="width: 18rem; background-color: rgb(43, 43, 43); margin: 30px; align-items: center;">
         <div class="card-body">
             <h5 class="card-title" style="color: whitesmoke;">${izena}</h5>
             <span class="card-text" style="color: whitesmoke;">${email}</span>
