@@ -80,8 +80,8 @@
 						Apunteak Ikusi
 					</a>
 				</li>
-				<hr>
-				<li class="nav-item">
+				<hr th:if="${user.getRole().getType().name()=='Student'}">
+				<li class="nav-item" th:if="${user.getRole().getType().name()=='Student'}">
 					<a class="nav-link text-warning" th:href="@{/apunteak/sortu}">
 						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
 							stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -93,8 +93,8 @@
 						Apunteak Sortu
 					</a>
 				</li>
-				<hr>
-				<li class="nav-item">
+				<hr th:if="${user.getRole().getType().name()=='Student'}">
+				<li class="nav-item" th:if="${user.getRole().getType().name()=='Student'}">
 					<a class="nav-link text-warning" th:href="@{/ikasgaiak/notak/ikusi}">
 						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
 							stroke-width="2" stroke-linecap="round" stroke-linejoin="round"

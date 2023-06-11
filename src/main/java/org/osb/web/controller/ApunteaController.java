@@ -11,6 +11,7 @@ import org.osb.web.domain.apuntea.service.ApunteaService;
 import org.osb.web.domain.artxiboa.dto.ArtxiboaDto;
 import org.osb.web.domain.balorazioa.dto.BalorazioaDto;
 import org.osb.web.domain.balorazioa.service.BalorazioaService;
+import org.osb.web.domain.ikasgaia.dto.IkasgaiaDto;
 import org.osb.web.domain.ikasgaia.service.IkasgaiaService;
 import org.osb.web.domain.user.dto.UserDto;
 import org.osb.web.domain.user.service.UserService;
@@ -46,18 +47,11 @@ public class ApunteaController {
 
 	@GetMapping("/apunteak/{ikasgaiid}")
 	public String apuntetegiaFiltratuta(@PathVariable("ikasgaiid") Long ikasgaiID, Model model, Principal principal) {
+		IkasgaiaDto ikasgaia = ikasgaiaService.findIkasgaiaDtoByID(ikasgaiID).orElse(new IkasgaiaDto());
 		model
-				.addAttribute( // Apunteak bistaratzeko atributua
-						"apunteak",
-						ikasgaiaService
-								.findIkasgaiaDtoByID(ikasgaiID)
-								.map(ikasgaiaDto -> ikasgaiaDto.getApunteak())
-								.orElse(new ArrayList<>()))
 				.addAttribute(
 						"ikasgaiid",
-						ikasgaiaService
-								.findIkasgaiaDtoByID(ikasgaiID)
-								.orElseThrow())
+						ikasgaia.getIkasgaiID())
 				.addAttribute("balorazioa", new BalorazioaDto())
 				.addAttribute("user", userService.findUserByEmail(principal.getName()).orElseThrow());
 		return "apuntetegia";
@@ -69,27 +63,39 @@ public class ApunteaController {
 		return "apuntetegia";
 	}
 
-	@PostMapping("/apunteak/{apunteId}")
-	public String apuntetegiaPost(@PathVariable("apunteId") Long apunteId, @RequestParam("bozka") int bozka,
-			Principal principal, HttpServletRequest request) {
+	@PostMapping("/apunteak/{apunteId}/{email}/plus")
+	public String apuntetegiaPlusPost(@PathVariable("apunteId") Long apunteId,@PathVariable("email") String email, HttpServletRequest request) {
 		UserDto userDto = userService
-				.findUserDtoByEmail(principal.getName())
+				.findUserDtoByEmail(email)
 				.orElseThrow(() -> new IllegalStateException("Hona iristeko beti logeatua egon behar du."));
 		ApunteaDto apunteaDto = apunteaService
 				.findApunteaDtoById(apunteId)
 				.orElseThrow(() -> new IllegalStateException("Hona iristeko beti baliozko apunte bat behar da."));
 		BalorazioaDto balorazioa = new BalorazioaDto();
-		balorazioa.setBalorazioa(bozka);
+		balorazioa.setBalorazioa(1);
 		balorazioa.setUserDto(userDto);
 		balorazioa.setApunteaDto(apunteaDto);
 		balorazioaService.saveBalorazioa(balorazioa);
 		return "redirect:" + request.getHeader("Referer");
 	}
-
+	@PostMapping("/apunteak/{apunteId}/{email}/minus")
+	public String apuntetegiaMinusPost(@PathVariable("apunteId") Long apunteId,@PathVariable("email") String email, HttpServletRequest request) {
+		UserDto userDto = userService
+				.findUserDtoByEmail(email)
+				.orElseThrow(() -> new IllegalStateException("Hona iristeko beti logeatua egon behar du."));
+		ApunteaDto apunteaDto = apunteaService
+				.findApunteaDtoById(apunteId)
+				.orElseThrow(() -> new IllegalStateException("Hona iristeko beti baliozko apunte bat behar da."));
+		BalorazioaDto balorazioa = new BalorazioaDto();
+		balorazioa.setBalorazioa(-1);
+		balorazioa.setUserDto(userDto);
+		balorazioa.setApunteaDto(apunteaDto);
+		balorazioaService.saveBalorazioa(balorazioa);
+		return "redirect:" + request.getHeader("Referer");
+	}
 	@GetMapping("/apunteak/sortu")
 	public String apuntetegiaSortu(Model model, Principal principal) {
 		model.addAttribute("user", userService.findUserByEmail(principal.getName()).orElseThrow());
-		model.addAttribute("ikasgaiak", userService.findIkasgaiakDtoByUser(principal.getName()));
 		return "apunteaSortu";
 	}
 
