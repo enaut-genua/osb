@@ -3,7 +3,6 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE-edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gaia Sortu</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -12,21 +11,21 @@
 </head>
 
 <body>
-    <main role="main" layout:fragment="main">
+    <main layout:fragment="main">
         <div class="container">
             <div class="row">
                 <div class="col-md-6 offset-md-3">
                     <div class="signup-form">
-                        <form role="form" th:action="@{/ikasgaiak/{ikasgaiid}/gaiak/sortu(ikasgaiid = ${ikasgaia.ikasgaiID})}" method="post" th:object="${gaia}"
+                        <form th:action="@{/ikasgaiak/{ikasgaiid}/gaiak/sortu(ikasgaiid = ${ikasgaia.ikasgaiID})}" method="post" th:object="${gaia}"
                             enctype="multipart/form-data" class="mt-5 border p-4 bg-light shadow">
                             <h4 class="mb-5 text-secondary">Gaia Sortu</h4>
                             <div class="row">
                                 <div class="mb-3 col-md-12">
-                                    <label for="Izenburua" class="col col-form-label">Ikasgaia: </label>
+                                    <label class="col col-form-label">Ikasgaia: </label>
                                     <span th:text="${ikasgaia.izena}" class="form-control"></span>
                                 </div>
                                 <div class="mb-3 col-md-12">
-                                    <label for="Edukia" class="col-sm-2 col-form-label">Gaia izena</label>
+                                    <label class="col-sm-2 col-form-label">Gaia izena</label>
                                     <input id="tituloa" type="text" name="izena" placeholder="Edukiaren Deskripzioa"
                                         class="form-control">
                                 </div>

@@ -2,7 +2,7 @@
 <html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <head>
-	<link rel="stylesheet" th:href="@{/css/sidebar.css}" />
+	<link rel="stylesheet" th:href="@{/css/sidebar.css}">
 	<link rel="stylesheet" th:href="@{/css/header.css}">
 	<script src="/js/sidebar.js"></script>
 	<title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE">OSB</title>
@@ -12,7 +12,7 @@
 
 	<main layout:fragment="main"></main>
 
-	<header role="header" class="row" id="header">
+	<header class="row" id="header">
 		<h1 id="aplicationTitle" class="col col-lg-8 col-sm-12 col-12">Online Student Backpack</h1>
 
 		<div class="col col-lg-3" style="margin-top: 10px;">
@@ -41,7 +41,7 @@
 		</a>
 	</header>
 
-	<aside role="aside" style="background-color: rgb(43, 43, 43);">
+	<aside style="background-color: rgb(43, 43, 43);">
 		<div class="hamburger-menu" onclick="openNav()">
 			<div class="bar top"></div>
 			<div class="bar middle"></div>
@@ -65,8 +65,8 @@
 						</svg>
 						Home
 					</a>
+					<hr>
 				</li>
-				<hr>
 				<li class="nav-item" th:each="ikasgaia: ${session.ikasgaiak}">
 					<a class="nav-link text-warning" th:href="@{/ikasgaiak/{ikasgaiid}(ikasgaiid = ${ikasgaia.ikasgaiID})}">
 						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-journals" viewBox="0 0 16 16">
@@ -75,8 +75,8 @@
 						  </svg>
 						<span th:text="${ikasgaia.izena}"></span>
 					</a>
+					<hr>
 				</li>
-				<hr>
 				<li class="nav-item">
 					<a class="nav-link text-warning" th:href="@{/apunteak}">
 						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -88,8 +88,8 @@
 						</svg>
 						Apunteak Ikusi
 					</a>
+					<hr th:if="${user.getRole().getType().name()=='Student'}">
 				</li>
-				<hr th:if="${user.getRole().getType().name()=='Student'}">
 				<li class="nav-item" th:if="${user.getRole().getType().name()=='Student'}">
 					<a class="nav-link text-warning" th:href="@{/apunteak/sortu}">
 						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -101,8 +101,8 @@
 						</svg>
 						Apunteak Sortu
 					</a>
+					<hr th:if="${user.getRole().getType().name()=='Student'}">
 				</li>
-				<hr th:if="${user.getRole().getType().name()=='Student'}">
 				<li class="nav-item" th:if="${user.getRole().getType().name()=='Student'}">
 					<a class="nav-link text-warning" th:href="@{/ikasgaiak/notak/ikusi}">
 						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
