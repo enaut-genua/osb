@@ -96,6 +96,8 @@ public class ApunteaController {
 	@GetMapping("/apunteak/sortu")
 	public String apuntetegiaSortu(Model model, Principal principal) {
 		model.addAttribute("user", userService.findUserByEmail(principal.getName()).orElseThrow());
+		model.addAttribute("ikasgaiak", userService.findIkasgaiakDtoByUser(principal.getName()));
+		
 		return "apunteaSortu";
 	}
 

@@ -5,7 +5,10 @@ insert into gradua values (1, 'Ingeniería Informática'), (2, 'Administración 
 insert into kurtsoa values (3, 'Infor 1', 1), (4, 'Infor 3', 1), (5, 'ADE 2', 2), (6, 'ADE 4', 2);
 
 -- Roles
-insert into role values (1, 1), (2, 2), (3, 3);
+insert into role values (1, 1), (2, 2), (3, 0);
+
+########################################      Admin      ########################################
+insert into user value (77777777, 'Cristiano', 'Ronaldo', 'cronaldo@osb.com', '$2a$10$679zXBIfsAIRtjsMi06KJOc96FybtlWevw98U7OB9cHMuQGcPtccu', "2023-05-10 15:30:45", 3);
 
 ########################################   Irakasleak   ########################################
 insert into user values 
@@ -90,7 +93,7 @@ insert into ikaslea values
 -- Infor 1. curso
 insert into ikasgaia values 
 (11, 'Matemática', 3, 45679130), (12, 'Física', 3, 68032001), (13, 'Programación', 3, 34205520), 
-(14, 'Programacion II', 3, 34205520), (15, 'Redes de Comunicación', 3, 67108894), (16, 'Estadística', 3, 97248841), 
+(14, 'Programacion II', 3, 34205520), (15, 'Redes de Comunicación', 3, 67108894), (16, 'Programacion III', 3, 97248841), 
 (17, 'Sistemas Operativos', 3, 67217721), (18, 'Desarrollo Web', 3, 67217721), (19, 'Matemática II', 3, 45679130);
 
 -- Infor 3.curso

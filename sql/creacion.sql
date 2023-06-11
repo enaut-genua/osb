@@ -5,24 +5,24 @@ use osb;
 
 
 create table gradua (
-    graduid 		bigint,
-    izena			varchar (50),
+    graduid 		        bigint auto_increment,
+    izena			        varchar (50),
     constraint GRAD_PK primary key (graduid));
 
 create table kurtsoa (
-	kurtsoid				bigint,
+	kurtsoid				bigint auto_increment,
     izena					varchar(20),
     gradua_graduid			bigint,
     constraint KURTS_PK primary key (kurtsoid),
     constraint KURTS_GRADU_FK foreign key (gradua_graduid) references gradua (graduid));
 
 create table role (
-	roleid 					bigint,
+	roleid 					bigint auto_increment,
     type 					tinyint,
     constraint ROLE_PK primary key (roleid));
 
 create table user (
-	userid 					bigint,
+	userid 					bigint auto_increment,
     izena 					varchar(20),
     abizena 				varchar(20),
     email 					varchar(255),
@@ -33,12 +33,7 @@ create table user (
     constraint USER_ROLE_PK foreign key (role_roleid) references role (roleid));
 
 create table ikaslea (
-	ikasleid				bigint unsigned,
-    #izena					varchar(15) not null,
-    #abizena				varchar(15) not null,
-    #email					varchar(50) not null,
-    #pasahitza 				varchar(20) not null,
-    #jaiotze_data			timestamp not null,
+	ikasleid				bigint unsigned auto_increment,
     gradua_graduid			bigint,
     kurtsoa_kurtsoid 		bigint,
     user_userid				bigint,
@@ -48,19 +43,14 @@ create table ikaslea (
     constraint IKASLE_USER_FK foreign key (user_userid) references user (userid));
 
 create table irakaslea (
-	irakasleid				bigint unsigned,
-    #izena					varchar(10),
-    #abizena				varchar(15),
-    #email					varchar(50),
-    #pasahitza 				varchar(20),
-    #jaiotze_data			timestamp,
+	irakasleid				bigint unsigned auto_increment,
 	user_userid				bigint,
     constraint IRAKAS_PK primary key (irakasleid),
     constraint IRAKASLE_USER_FK foreign key (user_userid) references user (userid));
 
 create table ikasgaia (
-	ikasgaiid					bigint,
-    izena 						varchar(50),
+	ikasgaiid					bigint auto_increment,
+    izena 						varchar(50) unique,
     kurtsoa_kurtsoid			bigint,
     irakaslea_irakasleid		bigint unsigned,
     constraint IKASGAI_PK primary key (ikasgaiid),
