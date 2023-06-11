@@ -65,14 +65,14 @@ create table gaia (
     constraint gaia_IKASGAI_FK foreign key (ikasgaia_ikasgaiid) references ikasgaia (ikasgaiid));
 
 create table azterketa (
-	azterketaid					bigint unsigned,
+	azterketaid					bigint unsigned auto_increment,
     izena						varchar(20) not null,
     ikasgaia_ikasgaiid			bigint,
     constraint AZTERK_PK primary key (azterketaid),
     constraint AZTERK_IKASGAI_FK foreign key (ikasgaia_ikasgaiid) references ikasgaia (ikasgaiid));
 
 create table ebaluaketa (
-	ebaluaketaid				bigint,
+	ebaluaketaid				bigint auto_increment,
     nota						double,
     komentarioa					varchar(255),
     ikaslea_ikasleid			bigint unsigned,
@@ -114,14 +114,6 @@ create table ikasgaia_ikaslea (
 	ikasgaia_ikasgaiid			bigint,
     ikaslea_ikasleid			bigint,
     constraint IKASGAI_IKASLE_PK primary key (ikaslea_ikasleid, ikasgaia_ikasgaiid));
-    
-create table azterketa_ikaslea (
-	ikaslea_ikasleid			bigint,
-    azterketa_azterketaid		bigint,
-    nota						float,
-    komentarioa					varchar(60),
-    nota_reku					float,
-   constraint azterketa_IKASLE_PK primary key (ikaslea_ikasleid, azterketa_azterketaid));
    
 create table kurtsoa_ikaslea (
 	ikaslea_ikasleid			bigint,

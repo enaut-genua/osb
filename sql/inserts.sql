@@ -7,7 +7,8 @@ insert into kurtsoa values (3, 'Infor 1', 1), (4, 'Infor 3', 1), (5, 'ADE 2', 2)
 -- Roles
 insert into role values (1, 1), (2, 2), (3, 0);
 
-########################################      Admin      ########################################
+## Admin ##
+#use osb;
 insert into user value (77777777, 'Cristiano', 'Ronaldo', 'cronaldo@osb.com', '$2a$10$679zXBIfsAIRtjsMi06KJOc96FybtlWevw98U7OB9cHMuQGcPtccu', "2023-05-10 15:30:45", 3);
 
 ########################################   Irakasleak   ########################################
@@ -46,25 +47,25 @@ insert into irakaslea values
 ########################################   Ikasleak   ########################################
 insert into user values 
 -- Infor 1. curso
-(45352838, 'Unai', 'Agirre', 'uagirre@osb.com', '$2a$10$679zXBIfsAIRtjsMi06KJOc96FybtlWevw98U7OB9cHMuQGcPtccu', "2023-05-10 15:30:45", 2),
-(39892610, 'Julen', 'Iturrospe', 'jiturrospe@osb.com', '$2a$10$679zXBIfsAIRtjsMi06KJOc96FybtlWevw98U7OB9cHMuQGcPtccu', "2023-05-10 15:30:45", 2),
-(10587663, 'Martin', 'Arza', 'marza@osb.com', '$2a$10$679zXBIfsAIRtjsMi06KJOc96FybtlWevw98U7OB9cHMuQGcPtccu', "2023-05-10 15:30:45", 2),
-(68155391, 'Carlos', 'Perez', 'cperez@osb.com', '$2a$10$679zXBIfsAIRtjsMi06KJOc96FybtlWevw98U7OB9cHMuQGcPtccu', "2023-05-10 15:30:45", 2),
-(10222304, 'Ander', 'Garcia', 'agarcia@osb.com', '$2a$10$679zXBIfsAIRtjsMi06KJOc96FybtlWevw98U7OB9cHMuQGcPtccu', "2023-05-10 15:30:45", 2),
+(45352838, 'Unai', 'Agirre', 'uagirre@osb.com', '$2a$10$679zXBIfsAIRtjsMi06KJOc96FybtlWevw98U7OB9cHMuQGcPtccu', "2023-05-10 15:30:45", 1),
+(39892610, 'Julen', 'Iturrospe', 'jiturrospe@osb.com', '$2a$10$679zXBIfsAIRtjsMi06KJOc96FybtlWevw98U7OB9cHMuQGcPtccu', "2023-05-10 15:30:45", 1),
+(10587663, 'Martin', 'Arza', 'marza@osb.com', '$2a$10$679zXBIfsAIRtjsMi06KJOc96FybtlWevw98U7OB9cHMuQGcPtccu', "2023-05-10 15:30:45", 1),
+(68155391, 'Carlos', 'Perez', 'cperez@osb.com', '$2a$10$679zXBIfsAIRtjsMi06KJOc96FybtlWevw98U7OB9cHMuQGcPtccu', "2023-05-10 15:30:45", 1),
+(10222304, 'Ander', 'Garcia', 'agarcia@osb.com', '$2a$10$679zXBIfsAIRtjsMi06KJOc96FybtlWevw98U7OB9cHMuQGcPtccu', "2023-05-10 15:30:45", 1),
 -- Infor 3.curso
-(29866122, 'Eneko', 'Zugazaga', 'ezugazaga@osb.com', '$2a$10$679zXBIfsAIRtjsMi06KJOc96FybtlWevw98U7OB9cHMuQGcPtccu', "2023-05-10 15:30:45", 2),
-(39265610, 'Maddi', 'Arregi', 'marregi@osb.com', '$2a$10$679zXBIfsAIRtjsMi06KJOc96FybtlWevw98U7OB9cHMuQGcPtccu', "2023-05-10 15:30:45", 2),
-(68291001, 'Jonathan', 'Flores', 'jfroles@osb.com', '$2a$10$679zXBIfsAIRtjsMi06KJOc96FybtlWevw98U7OB9cHMuQGcPtccu', "2023-05-10 15:30:45", 2),
-(90021866, 'Aitor', 'Gonzalez', 'agonzalez@osb.com', '$2a$10$679zXBIfsAIRtjsMi06KJOc96FybtlWevw98U7OB9cHMuQGcPtccu', "2023-05-10 15:30:45", 2),
+(29866122, 'Eneko', 'Zugazaga', 'ezugazaga@osb.com', '$2a$10$679zXBIfsAIRtjsMi06KJOc96FybtlWevw98U7OB9cHMuQGcPtccu', "2023-05-10 15:30:45", 1),
+(39265610, 'Maddi', 'Arregi', 'marregi@osb.com', '$2a$10$679zXBIfsAIRtjsMi06KJOc96FybtlWevw98U7OB9cHMuQGcPtccu', "2023-05-10 15:30:45", 1),
+(68291001, 'Jonathan', 'Flores', 'jfroles@osb.com', '$2a$10$679zXBIfsAIRtjsMi06KJOc96FybtlWevw98U7OB9cHMuQGcPtccu', "2023-05-10 15:30:45", 1),
+(90021866, 'Aitor', 'Gonzalez', 'agonzalez@osb.com', '$2a$10$679zXBIfsAIRtjsMi06KJOc96FybtlWevw98U7OB9cHMuQGcPtccu', "2023-05-10 15:30:45", 1),
 -- ADE 2. curso
-(56789540, 'Ainhoa', 'Murgia', 'amurgia@osb.com', '$2a$10$679zXBIfsAIRtjsMi06KJOc96FybtlWevw98U7OB9cHMuQGcPtccu', "2023-05-10 15:30:45", 2),
-(13407900, 'Asier', 'Berreteaga', 'aberreteaga@osb.com', '$2a$10$679zXBIfsAIRtjsMi06KJOc96FybtlWevw98U7OB9cHMuQGcPtccu', "2023-05-10 15:30:45", 2),
-(49753200, 'Aimar', 'Erostarbe', 'aerostarbe@osb.com', '$2a$10$679zXBIfsAIRtjsMi06KJOc96FybtlWevw98U7OB9cHMuQGcPtccu', "2023-05-10 15:30:45", 2),
-(79242270, 'Begoña', 'Erasti', 'berasti@osb.com', '$2a$10$679zXBIfsAIRtjsMi06KJOc96FybtlWevw98U7OB9cHMuQGcPtccu', "2023-05-10 15:30:45", 2),
+(56789540, 'Ainhoa', 'Murgia', 'amurgia@osb.com', '$2a$10$679zXBIfsAIRtjsMi06KJOc96FybtlWevw98U7OB9cHMuQGcPtccu', "2023-05-10 15:30:45", 1),
+(13407900, 'Asier', 'Berreteaga', 'aberreteaga@osb.com', '$2a$10$679zXBIfsAIRtjsMi06KJOc96FybtlWevw98U7OB9cHMuQGcPtccu', "2023-05-10 15:30:45", 1),
+(49753200, 'Aimar', 'Erostarbe', 'aerostarbe@osb.com', '$2a$10$679zXBIfsAIRtjsMi06KJOc96FybtlWevw98U7OB9cHMuQGcPtccu', "2023-05-10 15:30:45", 1),
+(79242270, 'Begoña', 'Erasti', 'berasti@osb.com', '$2a$10$679zXBIfsAIRtjsMi06KJOc96FybtlWevw98U7OB9cHMuQGcPtccu', "2023-05-10 15:30:45", 1),
 -- ADE 4. curso
-(13765234, 'Unai', 'Dieguez', 'udieguez@osb.com', '$2a$10$679zXBIfsAIRtjsMi06KJOc96FybtlWevw98U7OB9cHMuQGcPtccu', "2023-05-10 15:30:45", 2),
-(13277745, 'Diogo', 'Sousa', 'dsousa@osb.com', '$2a$10$679zXBIfsAIRtjsMi06KJOc96FybtlWevw98U7OB9cHMuQGcPtccu', "2023-05-10 15:30:45", 2),
-(98753200, 'Nikolas', 'Beitia', 'nbeitia@asb.com', '$2a$10$679zXBIfsAIRtjsMi06KJOc96FybtlWevw98U7OB9cHMuQGcPtccu', "2023-05-10 15:30:45", 2);
+(13765234, 'Unai', 'Dieguez', 'udieguez@osb.com', '$2a$10$679zXBIfsAIRtjsMi06KJOc96FybtlWevw98U7OB9cHMuQGcPtccu', "2023-05-10 15:30:45", 1),
+(13277745, 'Diogo', 'Sousa', 'dsousa@osb.com', '$2a$10$679zXBIfsAIRtjsMi06KJOc96FybtlWevw98U7OB9cHMuQGcPtccu', "2023-05-10 15:30:45", 1),
+(98753200, 'Nikolas', 'Beitia', 'nbeitia@asb.com', '$2a$10$679zXBIfsAIRtjsMi06KJOc96FybtlWevw98U7OB9cHMuQGcPtccu', "2023-05-10 15:30:45", 1);
 
 -- ikasleak
 insert into ikaslea values 
@@ -204,10 +205,10 @@ insert into ikasgaia_ikaslea values
 (41, 13765234), (41, 13277745), (41, 98753200),
 (42, 13765234), (42, 13277745), (42, 98753200);
 
-insert into azterketa_ikaslea values
-(29866122, 139, 7.4, null, null), (29866122, 140, 9.0, 'ondo', null), (29866122, 141, 1.9, null,5.2), (29866122, 142, 3.1,'ondo', 4.0), 
-(29866122, 143, 5.4, null, null), (13407900, 144, 2.25, null, 3.2), (13407900, 145, 5.1, null, null), (13407900, 146, 4.82, null, null), 
-(13407900, 147, 3.1, 'gaizki', 2.2), (13407900, 148, 2.4, null, 1.9);
+#insert into azterketa_ikaslea values
+#(29866122, 139, 7.4, null, null), (29866122, 140, 9.0, 'ondo', null), (29866122, 141, 1.9, null,5.2), (29866122, 142, 3.1,'ondo', 4.0), 
+#(29866122, 143, 5.4, null, null), (13407900, 144, 2.25, null, 3.2), (13407900, 145, 5.1, null, null), (13407900, 146, 4.82, null, null), 
+#(13407900, 147, 3.1, 'gaizki', 2.2), (13407900, 148, 2.4, null, 1.9);
 
 insert into kurtsoa_ikaslea values 
 (45352838, 3), (39892610, 3), (10587663, 3), (68155391, 3), (10222304, 3), 
