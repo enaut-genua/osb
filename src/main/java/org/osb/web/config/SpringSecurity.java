@@ -30,8 +30,8 @@ import jakarta.servlet.http.HttpServletResponse;
 public class SpringSecurity {
 
 	private String[] resources = {"/css/**", "/js/**", "/images/**"};
-	private String[] authenticated = {"/menu", "/ikasgaiak/**", "/gaiak/**", "/apunteak/**", "/ourws/**", "/ws/**"}; 
-	private String[] admin = {"/users", "/administration/**", "/register/**"}; 
+	private String[] authenticated = {"/ikasgaiak/**", "/gaiak/**", "/apunteak/**", "/ourws/**", "/ws/**"}; 
+	private String[] admin = {"/administration/**", "/register/**"}; 
 
 	@Autowired
 	private UserDetailsService userDetailsService;

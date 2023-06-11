@@ -1,7 +1,6 @@
 package org.osb.web.controller;
 
 import java.security.Principal;
-import java.util.List;
 
 import org.osb.web.domain.user.dto.UserDto;
 import org.osb.web.domain.user.service.UserService;
@@ -21,17 +20,11 @@ public class LoginController {
 	@Autowired
 	private UserService userService;
 
-	@GetMapping("/index")
-	public String home() {
-		return "menu";
-	}
-
 	@GetMapping("/login")
 	public String loginForm() {
 		return "login";
 	}
 
-	// handler method to handle user registration request
 	@GetMapping("/register")
 	public String showRegistrationForm(Model model) {
 		UserDto user = new UserDto();
@@ -39,7 +32,6 @@ public class LoginController {
 		return "register";
 	}
 
-	// handler method to handle register user form submit request
 	@PostMapping("/register/save")
 	public String registration(@Valid @ModelAttribute("user") UserDto user,
 			BindingResult result,
@@ -53,19 +45,7 @@ public class LoginController {
 		return "redirect:/administration";
 	}
 
-	@GetMapping("/users")
-	public String listRegisteredUsers(Model model) {
-		List<UserDto> users = userService.findAllUsers();
-		model.addAttribute("users", users);
-		return "users";
-	}
-
-	@GetMapping("/menu")
-	public String menu(Model model) {
-		return "menu";
-	}
-
-		@GetMapping("/administration")
+	@GetMapping("/administration")
 	public String adminMenu(Model model, Principal principal) {
 
 		model.addAttribute("userList", userService.findAllUsers());
