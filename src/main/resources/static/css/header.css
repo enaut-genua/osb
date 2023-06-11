@@ -4,12 +4,12 @@
     text-align: center;
 }
 
-h1 {
+#aplicationTitle {
     color: rgb(235, 167, 8); 
     margin-left: 0%;
 }
 
-p {
+#userPrint {
     color: aliceblue; 
     padding-left: 50px; 
     padding-top: 2px;
