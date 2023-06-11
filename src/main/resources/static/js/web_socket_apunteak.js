@@ -46,7 +46,7 @@ function showMessage(message) {
     var email = apunteLista[i].egileEmail;
     var puntuazioa = apunteLista[i].puntuazioa;
 gehituHtml = String.raw`
-<div class="col-md-3" >
+<div class="col-xl-4 col-lg-4 col-md-6 col-sm-8 col-8">
     <div class="card" style="width: 18rem; background-color: rgb(43, 43, 43); margin: 30px; align-items: center;">
         <div class="card-body">
             <h5 class="card-title" style="color: whitesmoke;">${izena}</h5>

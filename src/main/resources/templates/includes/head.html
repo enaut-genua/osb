@@ -63,7 +63,19 @@
 							<polyline points="2 17 12 22 22 17"></polyline>
 							<polyline points="2 12 12 17 22 12"></polyline>
 						</svg>
-						Ikasgaiak
+						Home
+					</a>
+				</li>
+				<hr>
+				<li class="nav-item" th:each="ikasgaia: ${session.ikasgaiak}">
+					<a class="nav-link text-warning" th:href="@{/ikasgaiak/{ikasgaiid}(ikasgaiid = ${ikasgaia.ikasgaiID})}">
+						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+							stroke-linecap="round" stroke-linejoin="round" class="feather feather-layers">
+							<polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+							<polyline points="2 17 12 22 22 17"></polyline>
+							<polyline points="2 12 12 17 22 12"></polyline>
+						</svg>
+						<span th:text="${ikasgaia.izena}"></span>
 					</a>
 				</li>
 				<hr>

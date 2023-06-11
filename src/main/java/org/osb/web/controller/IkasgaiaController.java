@@ -36,6 +36,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.view.RedirectView;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
 @Controller
@@ -61,9 +62,13 @@ public class IkasgaiaController {
 
 	// visualizar todas en base al user
 	@GetMapping("/ikasgaiak")
-	public String home(Model model, Principal principal) {
-		model.addAttribute("ikasgaiak", userService.findIkasgaiakDtoByUser(principal.getName()));
+	public String home(Model model, Principal principal, HttpSession httpSession) {
 		model.addAttribute("user", userService.findUserByEmail(principal.getName()).orElseThrow());
+		
+		if(httpSession.getAttribute("ikasgaiak")==null){
+            httpSession.setAttribute("ikasgaiak", userService.findIkasgaiakDtoByUser(principal.getName()));
+        }
+
 		return "ikasgaiak";
 	}
 

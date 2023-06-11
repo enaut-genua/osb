@@ -11,13 +11,13 @@
     <main role="main" layout:fragment="main">
         <div style="margin-top: 3%;">
             <div class="container">
-                <div class="row">
-                    <div class="col-md-4" th:each="ikasgaia: ${ikasgaiak}">
+                <div id="contenedor" class="row">
+                    <div class="col-md-4" th:each="ikasgaia: ${session.ikasgaiak}">
                         <div class="card mb-4 box-shadow" style="background-color: rgb(43, 43, 43);">
-                            <img class="card-img-top" th:data-src="@{'images/'+${ikasgaia.izena}+'.jpg'}"
-                                th:alt="@{'/images/'+${ikasgaia.izena}+'.jpg'}"
+                            <img class="card-img-top" th:data-src="@{'images/'+${ikasgaia.ikasgaiID}+'.jpg'}"
+                                th:alt="@{'/images/'+${ikasgaia.ikasgaiID}+'.jpg'}"
                                 style="height: 225px; width: 100%; display: block;"
-                                th:src="@{'images/'+${ikasgaia.izena}+'.jpg'}" data-holder-rendered="true">
+                                th:src="@{'images/'+${ikasgaia.ikasgaiID}+'.jpg'}" data-holder-rendered="true">
                             <div class="card-body" style="background-color: rgb(43, 43, 43);">
                                 <p class="card-text" th:text="${ikasgaia.izena}" style="color: whitesmoke;"></p>
                                 <div class="d-flex justify-content-between align-items-center">
