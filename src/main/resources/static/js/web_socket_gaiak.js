@@ -8,7 +8,7 @@ $(document).ready(function () {
         botoiak[i].addEventListener("click", function () {
             var buttonValue = this.value;
             console.log(buttonValue);
-            bidaliGaiaId(buttonValue)
+            kargatu(buttonValue);
         });
     }
 
@@ -20,7 +20,7 @@ function connect() {
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function () {
         console.log("connected");
-        stompClient.subscribe('/gaiak/notificaciones', function (message) {
+        stompClient.subscribe('/osb/gaiak', function (message) {
             // Manejar el mensaje recibido
             console.log(message.body);
             showMessage(message.body);
@@ -45,7 +45,17 @@ function showMessage(message) {
         $("#dataContainer").append(gehituHtml);
     }
 }
+function kargatu(id){
+    var divElement = document.getElementById("dataContainer");
+
+    while (divElement.firstChild) {
+        divElement.removeChild(divElement.firstChild);
+    }
+    gehituHtml = "<div class='text-center'><div class='spinner-border' role='status'><span class='visually-hidden'>Loading...</span></div></div>";
+        $("#dataContainer").append(gehituHtml);
+    bidaliGaiaId(id);
+}
 function bidaliGaiaId(id) {
     console.log("hooalla");
-    stompClient.send("/ws/message", {}, id);
+    stompClient.send("/ws/gaiak", {}, id);
 }

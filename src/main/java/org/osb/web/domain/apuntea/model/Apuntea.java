@@ -9,6 +9,7 @@ import org.osb.web.domain.ikaslea.model.Ikaslea;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -37,7 +38,7 @@ public class Apuntea {
 	@Column(nullable = false)
 	private String izena;
 
-	@OneToMany(mappedBy = "apuntea")
+	@OneToMany(mappedBy = "apuntea", fetch = FetchType.EAGER)
 	private List<Balorazioa> balorazioak;
 
 	@ManyToOne

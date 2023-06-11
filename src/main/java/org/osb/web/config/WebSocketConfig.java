@@ -13,7 +13,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
 	@Override
 	public void configureMessageBroker(MessageBrokerRegistry config) {
-		config.enableSimpleBroker("/gaiak");
+		config.enableSimpleBroker("/osb");
 		config.setApplicationDestinationPrefixes("/ws");
 	}
 

@@ -6,6 +6,7 @@ import java.util.stream.StreamSupport;
 
 import org.osb.web.domain.apuntea.dto.ApunteaDto;
 import org.osb.web.domain.apuntea.model.Apuntea;
+import org.osb.web.domain.apuntea.projection.ApunteaProjection;
 import org.osb.web.domain.apuntea.repository.ApunteaRepository;
 import org.osb.web.domain.apuntea.service.ApunteaService;
 import org.osb.web.domain.artxiboa.dto.ArtxiboaDto;
@@ -23,6 +24,7 @@ public class ApunteaServiceImpl implements ApunteaService {
 
 	@Autowired
 	private ApunteaRepository apunteaRepository;
+	
 
 	@Autowired
 	private UserService userService;
@@ -112,6 +114,19 @@ public class ApunteaServiceImpl implements ApunteaService {
 					return apunteaDto;
 				})
 				.toList();
+	}
+
+	@Override
+	public List<ApunteaDto> findApunteakInfo() {
+		
+		return apunteaRepository.findAllApunteaBy().stream().map(apunteaProjection->{
+			ApunteaDto apuntea = new ApunteaDto();
+			apuntea.setId(apunteaProjection.getApunteID());
+			apuntea.setEgileEmail(apunteaProjection.getIkaslea_User_Email());
+			apuntea.setIzena(apunteaProjection.getIzena());
+			apuntea.setPuntuazioa(findApunteaPuntuazioaById(apunteaProjection.getApunteID()).orElseThrow());
+			return apuntea;
+		}).toList();
 	}
 
 }

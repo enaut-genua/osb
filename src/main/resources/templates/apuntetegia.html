@@ -5,35 +5,22 @@
 	<title>Apuntetegia</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
 		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.2/sockjs.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+		<script src="/js/web_socket_apunteak.js"></script>
 </head>
 
 <body>
 	<main role="main" layout:fragment="main">
 		<div id="ikasgaiak" class="album py-5">
 			<div class="container">
-				<div class="row">
-					<div class="col-md-3" th:each="apuntea: ${apunteak}">
-						<div class="card" style="width: 18rem;">
-							<div class="card-body">
-								<h5 class="card-title" th:text="${apuntea.izena}"></h5>
-								<span class="card-text" th:text="${apuntea.egileEmail}"></span>
-								<hr>
-								<form th:action="@{/apunteak/{apunteId}/deskargatu(apunteId = ${apuntea.id})}"
-									method="get">
-									<button type="submit" class="btn btn-primary">Deskargatu</button>
-								</form>
-								<hr>
-								<div class="d-grid gap-2 d-md-flex">
-									<form th:action="@{/apunteak/{apunteId}(apunteId = ${apuntea.id})}" method="post">
-										<input type="submit" name="bozka" value="+1">
-										<span class="card-text" th:text="${apuntea.puntuazioa}"></span>
-										<input type="submit" name="bozka" value="-1">
-									</form>
-								</div>
-							</div>
+				<div class="row" id="dataContainer">
+					<div class="text-center">
+						<div class="spinner-border" role="status">
+						  <span class="visually-hidden">Loading...</span>
 						</div>
-					</div>
+					  </div>
 				</div>
 			</div>
 		</div>

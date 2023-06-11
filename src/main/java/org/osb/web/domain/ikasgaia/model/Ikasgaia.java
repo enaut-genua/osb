@@ -10,6 +10,7 @@ import org.osb.web.domain.kurtsoa.model.Kurtsoa;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -41,7 +42,7 @@ public class Ikasgaia {
     @Column(nullable = false)
 	private String izena;
 
-    @OneToMany(mappedBy = "ikasgaia")
+    @OneToMany(mappedBy = "ikasgaia", fetch = FetchType.EAGER)
     private List<Gaia> gaiak;
 
     @OneToMany(mappedBy = "ikasgaia")
