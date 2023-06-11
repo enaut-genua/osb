@@ -116,7 +116,7 @@ public class IkasgaiaController {
 			byte[] contenidoArchivo = artxiboa.getDokumentua();
 
 			HttpHeaders headers = new HttpHeaders();
-			headers.setContentType(MediaType.APPLICATION_PDF);
+			headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
 			headers.setContentDispositionFormData("attachment", artxiboa.getIzena());
 
 			return new ResponseEntity<>(contenidoArchivo, headers, HttpStatus.OK);
