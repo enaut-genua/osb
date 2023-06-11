@@ -3,23 +3,22 @@
 
 <head>
 	<link rel="stylesheet" th:href="@{/css/sidebar.css}" />
+	<link rel="stylesheet" th:href="@{/css/header.css}">
 	<script src="/js/sidebar.js"></script>
 	<title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE">OSB</title>
 </head>
 
 <body style="background-color: rgb(205, 134, 3);">
 
-	<main layout:fragment="main">
-	</main>
+	<main layout:fragment="main"></main>
 
-	<header role="header" style="background-color: rgb(43, 43, 43); text-align: center;" class="row">
-		<h1 style="color: rgb(235, 167, 8); margin-left: 0%;" class="col col-lg-8 col-sm-12">OSB</h1>
+	<header role="header" class="row" id="header">
+		<h1 id="aplicationTitle" class="col col-lg-8 col-sm-12 col-12">OSB</h1>
 
 		<div class="col col-lg-3" style="margin-top: 10px;">
 			<div class="row">
 				<input type="hidden" id="emaila" th:value="${user.email}">
-				<p th:text="${user.izena} + ' ' + ${user.abizena}"
-					style="color: aliceblue; padding-left: 50px; padding-top: 2px;" class="col-lg-8 col-sm-auto"></p>
+				<p th:text="${user.izena} + ' ' + ${user.abizena}" class="col-lg-8 col-sm-auto col-auto"></p>
 				<div class="col col-lg-4">
 					<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
 						class="bi bi-person-circle" viewBox="0 0 16 16" style="color: whitesmoke;">

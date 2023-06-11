@@ -143,7 +143,7 @@ public class IkasgaiaController {
 
 		azterketaService.saveAzterketa(azterketaDto, ebaluaketaDto);
 
-		return "redirect:" + request.getHeader("Referer"); 
+		return "ikasgaiak"; 
 	}
 
 	@GetMapping("/ikasgaiak/{ikasgaiid}/notak/sortu")
