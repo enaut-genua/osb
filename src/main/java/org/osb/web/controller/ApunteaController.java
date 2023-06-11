@@ -128,7 +128,7 @@ public class ApunteaController {
 			byte[] contenidoArchivo = apunteaDtoOptional.get().getArtxiboDtoLista().get(0).getDatuak();
 			HttpHeaders headers = new HttpHeaders();
 			headers.setContentType(MediaType.APPLICATION_PDF);
-			headers.setContentDispositionFormData("attachment", apunteaDtoOptional.get().getIzena());
+			headers.setContentDispositionFormData("attachment", apunteaDtoOptional.get().getArtxiboDtoLista().get(0).getIzena());
 
 			return new ResponseEntity<>(contenidoArchivo, headers, HttpStatus.OK);
 		}
