@@ -33,8 +33,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.view.RedirectView;
-
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -85,8 +83,8 @@ public class IkasgaiaController {
 	}
 
 	@PostMapping("/ikasgaiak/{ikasgaiid}/gaiak/sortu")
-	public RedirectView gaiaSortuPost(@Valid @ModelAttribute("gaia") GaiaDto gaia,
-			@PathVariable("ikasgaiid") Long ikasgaiaID, @RequestParam("archivos") List<MultipartFile> files)
+	public String gaiaSortuPost(@Valid @ModelAttribute("gaia") GaiaDto gaia,
+			@PathVariable("ikasgaiid") Long ikasgaiaID, @RequestParam("archivos") List<MultipartFile> files, HttpServletRequest request)
 			throws IOException {
 		List<ArtxiboaDto> listArtxiboaDtos = new ArrayList<>();
 
@@ -104,7 +102,7 @@ public class IkasgaiaController {
 			gaiaService.saveGaia(gaia);
 		}
 
-		return new RedirectView("/ikasgaiak/" + ikasgaiaID);
+		return "redirect:" + request.getHeader("Referer") + "?zuzen"; 
 	}
 
 	@GetMapping("/ikasgaiak/{ikasgaiid}/gaiak/sortu")
@@ -148,7 +146,7 @@ public class IkasgaiaController {
 
 		azterketaService.saveAzterketa(azterketaDto, ebaluaketaDto);
 
-		return "ikasgaiak"; 
+		return "redirect:" + request.getHeader("Referer") + "?zuzen"; 
 	}
 
 	@GetMapping("/ikasgaiak/{ikasgaiid}/notak/sortu")

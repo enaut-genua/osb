@@ -3,7 +3,6 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE-edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nota Sortu</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -14,34 +13,37 @@
 <body>
 
 
-    <main role="main" layout:fragment="main">
+    <main layout:fragment="main">
         <div class="container">
             <div class="row">
                 <div class="col-md-6 offset-md-3">
                     <div class="signup-form">
-                        <form role="form" th:action="@{/ikasgaiak/{ikasgaiid}/notak/sortu(ikasgaiid = ${ikasgaia.ikasgaiID})}" method="post" class="mt-5 border p-4 bg-light shadow">
+                        <form th:action="@{/ikasgaiak/{ikasgaiid}/notak/sortu(ikasgaiid = ${ikasgaia.ikasgaiID})}" method="post" class="mt-5 border p-4 bg-light shadow">
                             <h4 class="mb-5 text-secondary">Nota Sortu</h4>
-                            <div class="row">
+                            <div th:if="${param.zuzen}">
+								<div class="alert alert-success">Zuzen sortu dira notak.</div>
+							</div>
+							<div class="row">
                                 <div class="mb-3 col-md-12">
-                                    <label for="Ikasgaia" class="col col-form-label">Ikasgaia Izena: <span th:text="${ikasgaia.izena}"></span></label>
+                                    <label class="col col-form-label">Ikasgaia Izena: <span th:text="${ikasgaia.izena}"></span></label>
                                 </div>
 
                                 <div class="mb-3 col-md-6">
-                                    <label for="Azterketa" class="col col-form-label">Azterketa Izena</label>
+                                    <label class="col col-form-label">Azterketa Izena</label>
                                     <input type="text" class="form-control" name="izena"
                                         placeholder="Azterketa Izena">
                                 </div>
                                 <div class="mb-3 col-md-6">
-                                    <label for="Ikaslea" class="col col-form-label">Ikaslearen helbide elektronikoa</label>
+                                    <label class="col col-form-label">Ikaslearen helbide elektronikoa</label>
                                     <input type="email" class="form-control" name="ikaslea" placeholder="Ikaslea">
                                 </div>
                                 <div class="mb-3 col-md-6">
-                                    <label for="NotaAzterketa" class="col col-form-label">Nota Azterketa</label>
+                                    <label class="col col-form-label">Nota Azterketa</label>
                                     <input type="text" class="form-control" name="nota" placeholder="Nota">
                                 </div>
                                 <div class="mb-3 col-md-12">
-                                    <label for="Iruzkina" class="col col-form-label">Iruzkina</label>
-                                    <textarea type="text" class="form-control" name="komentarioa" placeholder="Iruzkina"
+                                    <label class="col col-form-label">Iruzkina</label>
+                                    <textarea class="form-control" name="komentarioa" placeholder="Iruzkina"
                                         rows="4" cols="80"></textarea>
                                 </div>
                                 <div class="col-md-12">

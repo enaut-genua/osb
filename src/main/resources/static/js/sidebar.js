@@ -5,7 +5,7 @@ function openNav() {
     if (x.matches) { // If media query matches
         document.getElementById("mySidenav").style.width = "40%";
     } else {
-        document.getElementById("mySidenav").style.width = "12%";
+        document.getElementById("mySidenav").style.width = "30%";
     }
 }
 

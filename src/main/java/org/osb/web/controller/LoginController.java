@@ -5,6 +5,7 @@ import java.security.Principal;
 import org.osb.web.domain.user.dto.UserDto;
 import org.osb.web.domain.user.service.UserService;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,14 +36,14 @@ public class LoginController {
 	@PostMapping("/register/save")
 	public String registration(@Valid @ModelAttribute("user") UserDto user,
 			BindingResult result,
-			Model model) {
+			Model model, HttpServletRequest request) {
 		if (userService.findUserDtoByEmail(user.getEmail()).isPresent()) {
 			result.rejectValue("email", null, "There is already an account registered with that email");
 			model.addAttribute("user", user);
 			return "register";
 		}
 		userService.saveUser(user);
-		return "redirect:/administration";
+		return "redirect:" + request.getHeader("Referer") + "?zuzen";
 	}
 
 	@GetMapping("/administration")

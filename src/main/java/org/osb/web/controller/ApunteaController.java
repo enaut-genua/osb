@@ -118,7 +118,7 @@ public class ApunteaController {
 		model.addAttribute("user", userService.findUserByEmail(principal.getName()).orElseThrow());		
 		apunteaService.saveApuntea(apunteaDto);
 
-		return "redirect:" + request.getHeader("Referer");
+		return "redirect:" + request.getHeader("Referer") + "?zuzen";
 	}
 
 	@GetMapping("/apunteak/{apunteId}/deskargatu")
