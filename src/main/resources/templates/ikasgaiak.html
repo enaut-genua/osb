@@ -13,7 +13,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-4" th:each="ikasgaia: ${ikasgaiak}">
-                        <div class="card mb-4 box-shadow">
+                        <div class="card mb-4 box-shadow" style="background-color: rgb(43, 43, 43);">
                             <img class="card-img-top" th:data-src="@{'images/'+${ikasgaia.izena}+'.jpg'}"
                                 th:alt="@{'/images/'+${ikasgaia.izena}+'.jpg'}"
                                 style="height: 225px; width: 100%; display: block;"

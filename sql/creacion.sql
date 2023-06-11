@@ -27,7 +27,7 @@ create table user (
     abizena 				varchar(20),
     email 					varchar(255),
     password 				varchar(255),
-    jaiotze_data			timestamp not null,
+    jaiotze_data			timestamp,
     role_roleid				bigint,
     constraint USER_PK primary key (userid),
     constraint USER_ROLE_PK foreign key (role_roleid) references role (roleid));

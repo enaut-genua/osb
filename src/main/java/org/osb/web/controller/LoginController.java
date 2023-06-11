@@ -1,5 +1,6 @@
 package org.osb.web.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.osb.web.domain.user.dto.UserDto;
@@ -49,7 +50,7 @@ public class LoginController {
 			return "register";
 		}
 		userService.saveUser(user);
-		return "redirect:/register?success";
+		return "redirect:/administration";
 	}
 
 	@GetMapping("/users")
@@ -63,4 +64,14 @@ public class LoginController {
 	public String menu(Model model) {
 		return "menu";
 	}
+
+		@GetMapping("/administration")
+	public String adminMenu(Model model, Principal principal) {
+
+		model.addAttribute("userList", userService.findAllUsers());
+		model.addAttribute("user", userService.findUserDtoByEmail(principal.getName()));
+
+		return "menuAdmin";
+	}
+
 }
