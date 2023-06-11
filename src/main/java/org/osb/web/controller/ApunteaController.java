@@ -63,10 +63,10 @@ public class ApunteaController {
 		return "apuntetegia";
 	}
 
-	@PostMapping("/apunteak/{apunteId}/{email}/plus")
-	public String apuntetegiaPlusPost(@PathVariable("apunteId") Long apunteId,@PathVariable("email") String email, HttpServletRequest request) {
+	@PostMapping("/apunteak/{apunteId}/plus")
+	public String apuntetegiaPlusPost(@PathVariable("apunteId") Long apunteId, HttpServletRequest request, Principal principal) {
 		UserDto userDto = userService
-				.findUserDtoByEmail(email)
+				.findUserDtoByEmail(principal.getName())
 				.orElseThrow(() -> new IllegalStateException("Hona iristeko beti logeatua egon behar du."));
 		ApunteaDto apunteaDto = apunteaService
 				.findApunteaDtoById(apunteId)
@@ -78,10 +78,10 @@ public class ApunteaController {
 		balorazioaService.saveBalorazioa(balorazioa);
 		return "redirect:" + request.getHeader("Referer");
 	}
-	@PostMapping("/apunteak/{apunteId}/{email}/minus")
-	public String apuntetegiaMinusPost(@PathVariable("apunteId") Long apunteId,@PathVariable("email") String email, HttpServletRequest request) {
+	@PostMapping("/apunteak/{apunteId}/minus")
+	public String apuntetegiaMinusPost(@PathVariable("apunteId") Long apunteId, HttpServletRequest request, Principal principal) {
 		UserDto userDto = userService
-				.findUserDtoByEmail(email)
+				.findUserDtoByEmail(principal.getName())
 				.orElseThrow(() -> new IllegalStateException("Hona iristeko beti logeatua egon behar du."));
 		ApunteaDto apunteaDto = apunteaService
 				.findApunteaDtoById(apunteId)
