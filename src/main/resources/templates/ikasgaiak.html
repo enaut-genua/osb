@@ -12,7 +12,7 @@
         <div style="margin-top: 3%;">
             <div class="container">
                 <div id="contenedor" class="row">
-                    <div class="col-lg-4 col-md-10 col-sm-6 col-6" th:each="ikasgaia: ${session.ikasgaiak}">
+                    <div class="col-lg-4 col-md-12 col-sm-6 col-6" th:each="ikasgaia: ${session.ikasgaiak}">
                         <div class="card mb-4 box-shadow" style="background-color: rgb(43, 43, 43);">
                             <img class="card-img-top" th:data-src="@{'images/'+${ikasgaia.ikasgaiID}+'.jpg'}"
                                 th:alt="@{'/images/'+${ikasgaia.ikasgaiID}+'.jpg'}"
