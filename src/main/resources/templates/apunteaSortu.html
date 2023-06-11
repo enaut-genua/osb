@@ -19,6 +19,9 @@
 						<form th:action="@{/apunteak/gorde}" method="post" th:object="${apuntea}"
 							enctype="multipart/form-data" class="mt-5 border p-4 bg-light shadow">
 							<h4 class="mb-5 text-secondary">Apunteak Sortu</h4>
+							<div th:if="${param.zuzen}">
+								<div class="alert alert-success">Zuzen sortu dira apunteak.</div>
+							</div>
 							<div class="row">
 								<div class="mb-3 col-md-12">
 									<select name="ikasgaiIzena">

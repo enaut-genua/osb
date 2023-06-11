@@ -19,6 +19,9 @@
                         <form th:action="@{/ikasgaiak/{ikasgaiid}/gaiak/sortu(ikasgaiid = ${ikasgaia.ikasgaiID})}" method="post" th:object="${gaia}"
                             enctype="multipart/form-data" class="mt-5 border p-4 bg-light shadow">
                             <h4 class="mb-5 text-secondary">Gaia Sortu</h4>
+							<div th:if="${param.zuzen}">
+								<div class="alert alert-success">Zuzen sortu da gaia.</div>
+							</div>
                             <div class="row">
                                 <div class="mb-3 col-md-12">
                                     <label class="col col-form-label">Ikasgaia: </label>
